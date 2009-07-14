@@ -1,6 +1,6 @@
 ProwlPHP
 
-Current Version: 0.3
+Current Version: 0.3.1
 Written by Fenric (sandbox@fenric.co.uk), 9 July 2009
  
 Hello there! This is a PHP class for Prowls iPhone notificaton service with API key authentication. More information on Prowl can be found at  http://prowl.weks.net/. For more information on the class and the Prowl API take a look at the Wiki page (http://wiki.github.com/Fenric/ProwlPHP).
@@ -10,6 +10,10 @@ I'd love to hear your ideas, suggestions and even your uses for ProwlPHP. Just d
 ------
 Release Notes
 ------
+
+0.3.1
+* Minor revision to include checks at construction to ensure curl_exec and cURL SSL are available.
+* Error codes can now be manually passed through getError(int $code) to return the error message.
 
 0.3
 * HTTP proxy support added.
@@ -35,3 +39,4 @@ Planned
 ------
 
 * Optimize the code as much as possible! 
+* Any ideas? Drop me a message! 
