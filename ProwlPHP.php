@@ -2,7 +2,7 @@
 
 class Prowl
 {
-	private $_version = '0.3';
+	private $_version = '0.3.1';
 	private $_obj_curl = null;
 	private $_return_code;
 	private $_remaining;
@@ -29,6 +29,12 @@ class Prowl
 	
 	public function __construct($apikey=null, $verify=false, $provkey=null, $proxy=null, $userpwd=null)
 	{
+		$curl_info = curl_version();	// Checks for cURL function and SSL version. Thanks Adrian Rollett!
+		if(!function_exists('curl_exec') || empty($curl_info['ssl_version']))
+		{
+			die($this->getError(10000));
+		}
+		
 		if(isset($proxy))
 			$this->_setProxy($proxy, $userpwd);
 		
@@ -88,16 +94,18 @@ class Prowl
 		return $this->_response($return);	
 	}
 		
-	public function getError()
+	public function getError($code=null)
 	{
-		switch($this->_return_code)
+		$code = (empty($code)) ? $this->_return_code : $code;
+		switch($code)
 		{
-			case 200: 	return 'Request Successfull.';	break;
+			case 200: 	return 'Request Successful.';	break;
 			case 400:	return 'Bad request, the parameters you provided did not validate.';	break;
 			case 401: 	return 'The API key given is not valid, and does not correspond to a user.';	break;
 			case 405:	return 'Method not allowed, you attempted to use a non-SSL connection to Prowl.';	break;
 			case 406:	return 'Your IP address has exceeded the API limit.';	break;
 			case 500:	return 'Internal server error, something failed to execute properly on the Prowl side.';	break;
+			case 10000:	return 'cURL library missing vital functions or does not support SSL. cURL w/SSL is required to execute ProwlPHP.';	break;
 			case 10001:	return 'Parameter value exceeds the maximum byte size.';	break;
 			default:	return false;	break;
 		}
