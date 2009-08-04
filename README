@@ -1,8 +1,9 @@
 ProwlPHP
-
-Current Version: 0.3.1
 Written by Fenric (sandbox@fenric.co.uk), 9 July 2009
- 
+
+- Current Version: 0.3.1
+- Requirements: PHP 5 (or higher), cURL with SSL support.
+
 Hello there! This is a PHP class for Prowls iPhone notificaton service with API key authentication. More information on Prowl can be found at  http://prowl.weks.net/. For more information on the class and the Prowl API take a look at the Wiki page (http://wiki.github.com/Fenric/ProwlPHP).
 
 I'd love to hear your ideas, suggestions and even your uses for ProwlPHP. Just drop me (Fenric) a message in the CocoaForge forums (http://forums.cocoaforge.com/memberlist.php?mode=viewprofile&u=41743) or right here on Github! Please post any issues you find on the issues section of GitHub (http://github.com/Fenric/ProwlPHP/issues).
