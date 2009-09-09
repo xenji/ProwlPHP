@@ -39,5 +39,5 @@ Release Notes
 Planned
 ------
 
-* Optimize the code as much as possible! 
-* Any ideas? Drop me a message! 
+* API Key chaining checks.
+* Support for PHP 4
