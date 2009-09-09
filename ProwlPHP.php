@@ -19,7 +19,7 @@ class Prowl
 	private $_url_push = 'add';
 	
 	private $_params = array(			// Accessible params [key => maxsize]
-		'apikey' 		=> 		40,		// User API Key.
+		'apikey' 		=> 		204,		// User API Key.
 		'providerkey' 	=>		40,		// Provider key.
 		'priority' 		=> 		2,		// Range from -2 to 2.
 		'application' 	=> 		254,	// Name of the app.
