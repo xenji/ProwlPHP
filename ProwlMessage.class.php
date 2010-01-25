@@ -211,7 +211,7 @@ class ProwlMessage
 	{
 		$mVal = filter_var($iPrio, FILTER_VALIDATE_INT);
 		
-		if (($mVal != false) && (-2 <= $mVal <= 2))
+		if (($mVal !== false) && ($mVal >= -2) && ($mVal <= 2))
 			$this->iPriority = $mVal;
 		else 
 			throw new InvalidArgumentException(

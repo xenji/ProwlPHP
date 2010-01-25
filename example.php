@@ -11,15 +11,12 @@ $oMsg 	= new ProwlMessage();
 
 try 
 {
+	$oProwl->setIsPostRequest(true);
 	$oMsg->setPriority(0);
 	
 	// You can ADD up to 5 api keys
-	$oMsg->addApiKey('FIRST_API_KEY');
-	$oMsg->addApiKey('SECND_API_KEY');
+	$oMsg->addApiKey('e0bf09a4cc20ae0bcd63b30b19031ef59a458634');
 
-	$oMsg->removeApiKey('FIRST_API_KEY');
-	
-	
 	$oMsg->setEvent('My Event!');
 	
 	// These are optional:
@@ -32,6 +29,8 @@ try
 	{
 		print $oProwl->getError();
 	} // if
+	
+	else print "Mesage sent";
 }
 catch (InvalidArgumentException $oIAE)
 {

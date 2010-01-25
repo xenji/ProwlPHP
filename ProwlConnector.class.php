@@ -181,7 +181,7 @@ class ProwlConnector
 		
 		$aParams['apikey'] 		= $oMessage->getApiKeysAsString();
 		$aParams['providerkey'] = $this->sProviderKey;
-		$aParams['applicaion']	= $oMessage->getApplication();
+		$aParams['application']	= $oMessage->getApplication();
 		$aParams['event']		= $oMessage->getEvent();
 		$aParams['description']	= $oMessage->getDescription();
 		
