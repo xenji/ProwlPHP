@@ -26,25 +26,6 @@ class ProwlConnector
 	protected $rCurl 			= null;
 	
 	/**
-	 * API return code
-	 * @var integer
-	 */
-	protected $iReturnCode 		= null;
-	
-	/**
-	 * The count of remaining requests
-	 * @var integer
-	 */
-	protected $iRemaining 		= null;
-	
-	/**
-	 * The date for the remaining to be
-	 * resetted
-	 * @var integer
-	 */
-	protected $iResetDate		= null;
-	
-	/**
 	 * Shall we use a proxy?
 	 * @var boolean
 	 */
@@ -97,7 +78,12 @@ class ProwlConnector
 	 */
 	protected $sPushEndpoint 	= 'add';
 	
-	
+	/**
+	 * The last response that was 
+	 * received from the API.
+	 * @var ProwlResponse
+	 */
+	protected $oLastResponse	= null;
 	
 	/**
 	 * ProwlConnector.class provides access to the 
@@ -121,16 +107,18 @@ class ProwlConnector
 	} // function
 	
 	/**
-	 * Verifies the keys.
+	 * Verifies the keys. This is optional but
+	 * will we part of the future workflow
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param string $sApikey
 	 * @param string $sProvkey
-	 * @return 
+	 * @return ProwlResponse
 	 */
 	public function verify($sApikey, $sProvkey)
 	{
 		$sReturn = $this->execute(sprintf($this->sVerifyContext, $sApikey, $sProvkey));		
-		return $this->response($sReturn);
+		return ProwlResponse::fromResponseXml($sReturn);
 	} // function
 	
 	
@@ -138,6 +126,7 @@ class ProwlConnector
 	 * Sets the provider key.
 	 * This method uses a fluent interface.
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param string $sKey
 	 * @return Prowl
 	 */
@@ -154,7 +143,8 @@ class ProwlConnector
 	/**
 	 * Sets the post request identifier to true or false.
 	 * This method uses a fluent interface.
-	 *  
+	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param boolean $bIsPost
 	 * @return Prowl
 	 */
@@ -173,7 +163,7 @@ class ProwlConnector
 	 * 
 	 * @author Mario Mueller <mario.mueller@mac@me.com>
 	 * @param ProwlMessage $oMessage
-	 * @return boolean
+	 * @return ProwlResponse
 	 */
 	public function push(ProwlMessage $oMessage)
 	{	
@@ -196,41 +186,52 @@ class ProwlConnector
 			
 		$sParams 	= http_build_query($aParams);
 		$sReturn 	= $this->execute($sContextUrl, $this->bIsPostRequest, $sParams);
-		$oResponse 	= ProwlResponse::fromResponseXml($sReturn);
 		
-		$this->iRemaining = $oResponse->getRemaining();
-		$this->iResetDate = $oResponse->getResetDate();
 		
-		return $oResponse;
+		$this->oLastResponse = ProwlResponse::fromResponseXml($sReturn);
+		
+		return $this->oLastResponse;
 	}
 		
 	
 	/**
 	 * The remaining requests
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
+	 * @throws RuntimeException
 	 * @return integer
 	 */
 	public function getRemaining()
 	{
-		return $this->iRemaining;
+		if (is_null($this->oLastResponse))
+			throw new RuntimeException(
+				'Cannot access last response. Did you made a request?');
+		return $this->oLastResponse->getRemaining();
 	}
 	
 	/**
-	 * The reset date
+	 * The reset date by last response.
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
+	 * @throws RuntimeException
 	 * @return integer
 	 */
 	public function getResetDate()
 	{
-		return $this->iResetDate;
+		if (is_null($this->oLastResponse))
+			throw new RuntimeException(
+				'Cannot access last response. Did you made a request?');
+		return $this->oLastResponse->getResetDate();
 	}
 	
 	/**
 	 * Executes the request via cUrl and returns the response.
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param string 	$sUrl 			The resource context
 	 * @param boolean 	$bIsPostRequest	Is it a post request?
 	 * @param string 	$sParams		The urlencode'ed params.
+	 * @return string
 	 */
 	protected function execute($sUrl, $bIsPostRequest = false, $sParams=null)
 	{
@@ -263,10 +264,11 @@ class ProwlConnector
 	/**
 	 * Sets the proxy server.
 	 * 
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @since  0.3.1
 	 * @param  string $sProxy 			The URL to a proxy server.
 	 * @param  string $sUserPassword	The Password for the server (opt.)
-	 * @return Prowl
+	 * @return ProwlConnector
 	 */
 	public function setProxy($sProxy, $sUserPasswd = null)
 	{

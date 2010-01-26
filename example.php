@@ -2,6 +2,7 @@
 
 require_once 'ProwlConnector.class.php';
 require_once 'ProwlMessage.class.php';
+require_once 'ProwlResponse.class.php';
 
 $oProwl = new ProwlConnector();
 $oMsg 	= new ProwlMessage();
@@ -23,14 +24,16 @@ try
 	$oMsg->setDescription('My Event description.');
 	$oMsg->setApplication('My Custom App Name.');
 	
-	$bSubmitted = $oProwl->push($oMsg);
-	
-	if ($bSubmitted == false)
+	$oResponse = $oProwl->push($oMsg);
+
+	if ($oResponse->isError())
+		print $oResponse->getErrorAsString();
+	else
 	{
-		print $oProwl->getError();
-	} // if
-	
-	else print "Mesage sent";
+		print "Message sent." . PHP_EOL;
+		print "You have " . $oResponse->getRemaining() . " Messages left." . PHP_EOL;
+		print "Your counter will be resetted on " . date('Y-m-d H:i:s', $oResponse->getResetDate());
+	}
 }
 catch (InvalidArgumentException $oIAE)
 {

@@ -1,21 +1,75 @@
 <?php
+/**
+ * Prowl Connector
+ * 
+ * This class provides a response of the connector.
+ * 
+ * @author Mario Mueller <mario.mueller.mac@me.com>
+ * @version 0.3.1
+ * @package Prowl
+ * @subpackage Response
+ */
 class ProwlResponse
 {
 	/**
 	 * The raw response.
+	 * @since  0.3.1
 	 * @var string
 	 */
-	protected $sRawResponse;
+	protected $sRawResponse 	= null;
 	
 	/**
 	 * The return code of the app.
-	 * @var unknown_type
+	 * @since  0.3.1
+	 * @var integer
 	 */
-	protected $iReturnCode = null;
+	protected $iReturnCode 		= null;
+	
+	/**
+	 * Constant to indicate a succuessfull
+	 * response.
+	 * @since  0.3.1
+	 * @var integer
+	 */
+	const RESPONSE_OK 			= 200;
+	
+	/**
+	 * Constant to indicate an unsuccessful
+	 * response.
+	 * @since  0.3.1
+	 * @var integer
+	 */
+	const RESPONSE_NOK 			= -1;
+	
+	/**
+	 * The count of remaining requests
+	 * @since  0.3.1
+	 * @var integer
+	 */
+	protected $iRemaining 		= null;
+	
+	/**
+	 * The date for the remaining to be
+	 * resetted.
+	 * @since  0.3.1
+	 * @var integer
+	 */
+	protected $iResetDate		= null;
+	
+	/**
+	 * Constructor made protected.
+	 * Use ProwlResponse::fromResponseXml().
+	 * 
+	 * @since  0.3.1
+	 * @see ProwlResponse::fromResponseXml()
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
+	 */
+	protected function __construct(){}
 	
 	/**
 	 * Takes the raw api response.
 	 * 
+	 * @since  0.3.1
 	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param string $sXml
 	 * @return ProwlResponse
@@ -31,30 +85,22 @@ class ProwlResponse
 	/**
 	 * Parses the raw xml data.
 	 * 
+	 * @since  0.3.1
 	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @return void
 	 */
 	protected function parseRawResponse()
 	{
-	
-	} // function
-	
-	/**
-	 * Handles the API response.
-	 * 
-	 * @since  0.3.1
-	 * @param  string $mReturn	The returned string from the API call.
-	 * @return boolean
-	 */
-	protected function response($mReturn)
-	{
-		if ($mReturn === false)
+		try 
+		{
+			$oSxmlResponse = new SimpleXMLElement($this->sRawResponse);
+		} // try
+		catch (Exception $oException)
 		{
 			$this->iReturnCode = 500;
-			return false;
-		}
+			return self::RESPONSE_NOK;
+		} // catch
 		
-		$oSxmlResponse = new SimpleXMLElement($mReturn);
 		
 		/* @var $oSxmlResponse SimpleXMLElement */
 		if ($oSxmlResponse->success instanceof SimpleXMLElement)
@@ -69,28 +115,69 @@ class ProwlResponse
 		} // else not successfull response
 
 		unset($oSxmlResponse);
-		
-		switch ($this->iReturnCode)
-		{
-			// Everything went alright
-			case 200: 	
-				return true;	
-			// Anything that is not 200 is a failure?				
-			default:	
-				return false;	
-		} // switch response code
 	} // function
+	
+	/**
+	 * Returns a boolean value indicating
+	 * if the response was an error or not.
+	 * 
+	 * @since  0.3.1
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
+	 * @return boolean
+	 */
+	public function isError()
+	{
+		if ($this->iReturnCode == self::RESPONSE_OK)
+			return false;
+		else
+			return true;
+	} // function
+
+	/**
+	 * Returns the corresponding error
+	 * message.
+	 * 
+	 * @since  0.3.1
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
+	 * @return string
+	 */
+	public function getErrorAsString()
+	{
+		return $this->getErrorByCode($this->iReturnCode);
+	} // function
+	
+	/**
+	 * The remaining requests.
+	 * 
+	 * @since  0.3.1
+	 * @return integer
+	 */
+	public function getRemaining()
+	{
+		return $this->iRemaining;
+	}
+	
+	/**
+	 * The reset date.
+	 * 
+	 * @since  0.3.1
+	 * @return integer
+	 */
+	public function getResetDate()
+	{
+		return $this->iResetDate;
+	}
 	
 	/**
 	 * Returns the error message to a given code.
 	 * 
+	 * @since  0.3.1
+	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @param integer $code
 	 * @return string
 	 */
-	public function getError($iCode=null)
+	protected function getErrorByCode($iCode)
 	{
-		$iCode = (empty($iCode)) ? $this->iReturnCode : $iCode;
-		
 		//TODO: Find a better way to implement error messages. 
 		switch($iCode)
 		{
@@ -103,6 +190,6 @@ class ProwlResponse
 			case 10000:	return 'cURL library missing vital functions or does not support SSL. cURL w/SSL is required to execute ProwlConnector.class.';	break;
 			case 10001:	return 'Parameter value exceeds the maximum byte size.';	break;
 			default:	return false;	break;
-		}
+		} // switch response code
 	} // function
 } // class
