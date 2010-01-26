@@ -26,6 +26,8 @@ Here are the things I've changed:
 * changed from private to protected, as there is no need to make them unreachable for child-classes 
 * removed closing ?> tags, as they are deprecated on php-only files.
 * rewrote example.php
+* Added fluent interface for most setters
+* Added response class for better reponse handling
 ------
 Release Notes
 ------
