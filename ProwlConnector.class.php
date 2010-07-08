@@ -174,6 +174,7 @@ class ProwlConnector
 		$aParams['application']	= $oMessage->getApplication();
 		$aParams['event']		= $oMessage->getEvent();
 		$aParams['description']	= $oMessage->getDescription();
+                $aParams['priority']	= $oMessage->getPriority();
 		
 		array_map(
 			create_function('$sAryVal', 'return str_replace("\\n","\n", $sAryVal);'),
