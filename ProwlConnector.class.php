@@ -7,7 +7,7 @@
  * 
  * @author Fenric <sandbox [at] fenric.co.uk>
  * @author Mario Mueller <mario.mueller.mac@me.com> - Refactored on 23rd of Jan. 2010
- * @version 0.3.1
+ * @version 0.3.2
  * @package Prowl
  * @subpackage Connector
  */
@@ -17,7 +17,7 @@ class ProwlConnector
 	 * The version
 	 * @var string
 	 */
-	protected $sVersion 		= '0.3.1';
+	protected $sVersion 		= '0.3.2';
 	
 	/**
 	 * The cUrl connection

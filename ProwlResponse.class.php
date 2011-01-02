@@ -5,7 +5,7 @@
  * This class provides a response of the connector.
  * 
  * @author Mario Mueller <mario.mueller.mac@me.com>
- * @version 0.3.1
+ * @version 0.3.2
  * @package Prowl
  * @subpackage Response
  */

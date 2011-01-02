@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Example File
+ * @author Mario Mueller <mario.mueller.mac@me.com>
+ * @version 0.3.2
+ */
 require_once 'ProwlConnector.class.php';
 require_once 'ProwlMessage.class.php';
 require_once 'ProwlResponse.class.php';
