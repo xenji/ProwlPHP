@@ -16,14 +16,14 @@ class ProwlResponse
 	 * @since  0.3.1
 	 * @var string
 	 */
-	protected $sRawResponse 	= null;
+	private $sRawResponse 	= null;
 	
 	/**
 	 * The return code of the app.
 	 * @since  0.3.1
 	 * @var integer
 	 */
-	protected $iReturnCode 		= null;
+	private $iReturnCode 		= null;
 	
 	/**
 	 * Constant to indicate a succuessfull
@@ -46,7 +46,7 @@ class ProwlResponse
 	 * @since  0.3.1
 	 * @var integer
 	 */
-	protected $iRemaining 		= null;
+	private $iRemaining 		= null;
 	
 	/**
 	 * The date for the remaining to be
@@ -54,7 +54,7 @@ class ProwlResponse
 	 * @since  0.3.1
 	 * @var integer
 	 */
-	protected $iResetDate		= null;
+	private $iResetDate		= null;
 	
 	/**
 	 * Constructor made protected.
@@ -64,7 +64,7 @@ class ProwlResponse
 	 * @see ProwlResponse::fromResponseXml()
 	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 */
-	protected function __construct(){}
+	private function __construct(){}
 	
 	/**
 	 * Takes the raw api response.
@@ -89,7 +89,7 @@ class ProwlResponse
 	 * @author Mario Mueller <mario.mueller.mac@me.com>
 	 * @return void
 	 */
-	protected function parseRawResponse()
+	private function parseRawResponse()
 	{
 		try 
 		{
@@ -103,18 +103,18 @@ class ProwlResponse
 		
 		
 		/* @var $oSxmlResponse SimpleXMLElement */
-		if ($oSxmlResponse->success instanceof SimpleXMLElement)
+		if ($oSxmlResponse->success['code'] != null)
 		{
 			$this->iReturnCode 	= (int) $oSxmlResponse->success['code'];
 			$this->iRemaining 	= (int) $oSxmlResponse->success['remaining'];
 			$this->iResetDate 	= (int) $oSxmlResponse->success['resetdate'];
+			return self::RESPONSE_OK;
 		} // if successful response
 		else
 		{
 			$this->iReturnCode 	= (int) $oSxmlResponse->error['code'];
+			return self::RESPONSE_NOK;
 		} // else not successfull response
-
-		unset($oSxmlResponse);
 	} // function
 	
 	/**
@@ -127,7 +127,7 @@ class ProwlResponse
 	 */
 	public function isError()
 	{
-		if ($this->iReturnCode == self::RESPONSE_OK)
+		if ($this->iReturnCode === self::RESPONSE_OK)
 			return false;
 		else
 			return true;
@@ -176,7 +176,7 @@ class ProwlResponse
 	 * @param integer $code
 	 * @return string
 	 */
-	protected function getErrorByCode($iCode)
+	private function getErrorByCode($iCode)
 	{
 		//TODO: Find a better way to implement error messages. 
 		switch($iCode)
