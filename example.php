@@ -48,5 +48,5 @@ catch (InvalidArgumentException $oIAE)
 }
 catch (OutOfRangeException $oOORE)
 {
-	print $oIAE->getMessage();
+	print $oOORE->getMessage();
 }
