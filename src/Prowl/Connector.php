@@ -102,6 +102,14 @@ class Connector {
 	protected $oLastResponse = null;
 
 	/**
+	 * Filter instance. This one is
+	 * passed from the connection on push, if the message
+	 * has no filter set.
+	 * @var \Prowl\Security\Secureable
+	 */
+	private $oFilterIntance = null;
+
+	/**
 	 * ProwlConnector.class provides access to the
 	 * webservice interface of Prowl by using
 	 * cUrl + SSL. Use the setters of this class
@@ -120,6 +128,28 @@ class Connector {
 		if (empty($curl_info['ssl_version'])) {
 			throw new \RuntimeException('Your cUrl Extension does not support SSL.');
 		}
+	}
+
+	/**
+	 * Set a filter instance. If you do not need a filter, use the
+	 * Passthrough filter.
+	 *
+	 * @param \Prowl\Security\Secureable $oFilterInstance
+	 * @return \Prowl\Message
+	 */
+	public function setFilter(\Prowl\Security\Secureable $oFilterInstance) {
+		$this->oFilterIntance = $oFilterInstance;
+		return $this;
+	}
+
+	/**
+	 * Returns the filter instance, if set. It might return null
+	 * when no filter is set.
+	 *
+	 * @return Prowl\Security\Secureable
+	 */
+	public function getFilter() {
+		return $this->oFilterIntance;
 	}
 
 	/**
@@ -174,12 +204,20 @@ class Connector {
 	/**
 	 * Pushes a message to the given api key.
 	 *
-	 * @author Mario Mueller <mario.mueller@mac@me.com>
 	 * @param ProwlMessage $oMessage
 	 * @return \Prowl\Response
 	 */
 	public function push(\Prowl\Message $oMessage) {
 		$oMessage->validate();
+
+		if ($oMessage->getFilter() == null) {
+			if ($this->getFilter() != null) {
+				$oMessage->setFilter($this->getFilter());
+			} else {
+				throw new \RuntimeException("No filter found. ".
+											"Please set a filter either in the message or in the connector");
+			}
+		}
 
 		$aParams['apikey'] = $oMessage->getApiKeysAsString();
 		$aParams['providerkey'] = $this->sProviderKey;
@@ -187,6 +225,10 @@ class Connector {
 		$aParams['event'] = $oMessage->getEvent();
 		$aParams['description'] = $oMessage->getDescription();
 		$aParams['priority'] = $oMessage->getPriority();
+
+		if ($oMessage->hasUrl()) {
+			$aParams['url'] = $oMessage->getUrl();
+		}
 
 		array_map(create_function('$sAryVal', 'return str_replace("\\n","\n", $sAryVal);'), $aParams);
 
@@ -208,7 +250,6 @@ class Connector {
 	/**
 	 * The remaining requests
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @throws RuntimeException
 	 * @return integer
 	 */

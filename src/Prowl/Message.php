@@ -68,6 +68,35 @@ class Message {
 	private $oFilterIntance = null;
 
 	/**
+	 * An Url to send with the message for redirecting.
+	 */
+	private $sUrl = null;
+
+	/**
+	 * Sets an Url to be sent with the message.
+	 * @throws \InvalidArgumentException
+	 * @param string url
+	 * @return void
+	 */
+	public function setUrl($sUrl) {
+		$sUrl = filter_var($sUrl, FILTER_VALIDATE_URL);
+
+		if (!$sUrl) {
+			throw new \InvalidArgumentException("Given url [$sUrl] did not pass the validation.");
+		}
+
+		$this->sUrl;
+	}
+
+	/**
+	 * Returns the Url that should be sent with the message
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->sUrl;
+	}
+
+	/**
 	 * Set a filter instance. If you do not need a filter, use the
 	 * Passthrough filter.
 	 *
