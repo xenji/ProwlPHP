@@ -53,7 +53,6 @@ class ProwlMessage
 	 */
 	public function setEvent($sEvent)
 	{
-		$sEvent 	= filter_var($sEvent, FILTER_SANITIZE_STRING);
 		$iStrlen 	= mb_strlen($sEvent, 'utf-8');
 		
 		if ($iStrlen > 1024)
@@ -83,7 +82,6 @@ class ProwlMessage
 	 */
 	public function setApplication($sApp)
 	{
-		$sApp		= filter_var($sApp, FILTER_SANITIZE_STRING);
 		$iStrlen 	= mb_strlen($sApp, 'utf-8');
 		
 		if ($iStrlen > 254)
@@ -115,7 +113,6 @@ class ProwlMessage
 	 */
 	public function setDescription($sDescr)
 	{
-		$sDescr 	= filter_var($sDescr, FILTER_SANITIZE_STRING);
 		$iStrlen	= mb_strlen($sDescr, 'utf-8');
 		
 		if ($iStrlen > 10000)
