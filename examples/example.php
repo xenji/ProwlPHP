@@ -1,7 +1,23 @@
 <?php
 /**
+ * Copyright [2011] [Mario Mueller]
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+/**
  * Example File
- * @author Mario Mueller <mario.mueller.mac@me.com>
+ * @author Mario Mueller <mario.mueller.work@gmail.com>
  * @version 0.3.2
  */
 require_once 'ProwlConnector.class.php';
@@ -9,44 +25,36 @@ require_once 'ProwlMessage.class.php';
 require_once 'ProwlResponse.class.php';
 
 $oProwl = new ProwlConnector();
-$oMsg 	= new ProwlMessage();
+$oMsg = new ProwlMessage();
 
 // If you have one:
 // $oProwl->setProviderKey('MY_PROVIDER_KEY');
 
-try 
-{
+try {
 	$oProwl->setIsPostRequest(true);
 	$oMsg->setPriority(0);
-	
+
 	// You can ADD up to 5 api keys
 	// This is a Test Key, please use your own.
 	$oMsg->addApiKey('e0bf09a4cc20ae0bcd63b30b19031ef59a458634');
 
 	$oMsg->setEvent('My Event!');
-	
+
 	// These are optional:
 	$oMsg->setDescription('My Event description.');
 	$oMsg->setApplication('My Custom App Name.');
-	
+
 	$oResponse = $oProwl->push($oMsg);
 
-	if ($oResponse->isError()) 
-	{	
+	if ($oResponse->isError()) {
 		print $oResponse->getErrorAsString();
-	}
-	else
-	{
+	} else {
 		print "Message sent." . PHP_EOL;
 		print "You have " . $oResponse->getRemaining() . " Messages left." . PHP_EOL;
 		print "Your counter will be resetted on " . date('Y-m-d H:i:s', $oResponse->getResetDate());
 	}
-}
-catch (InvalidArgumentException $oIAE)
-{
+} catch (InvalidArgumentException $oIAE) {
 	print $oIAE->getMessage();
-}
-catch (OutOfRangeException $oOORE)
-{
+} catch (OutOfRangeException $oOORE) {
 	print $oOORE->getMessage();
 }
