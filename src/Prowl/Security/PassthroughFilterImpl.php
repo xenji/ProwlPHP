@@ -16,6 +16,22 @@
  */
 namespace Prowl\Security;
 
-class FilterVarImpl implements Prowl\Security\Secureable {
+/**
+ * Simple pass-through filter
+ *
+ * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @version 1.0.0
+ * @package Prowl
+ * @subpackage Connector.Security
+ */
+class PassthroughFilterImpl implements \Prowl\Security\Secureable {
 
+	/**
+	 * Filters a string.
+	 * @param  String $sContentToFilter
+	 * @return string
+	 */
+	public function filter($sContentToFilter) {
+		return $sContentToFilter;
+	}
 }
