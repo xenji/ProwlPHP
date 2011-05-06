@@ -20,12 +20,9 @@
  * @author Mario Mueller <mario.mueller.work@gmail.com>
  * @version 0.3.2
  */
-require_once 'ProwlConnector.class.php';
-require_once 'ProwlMessage.class.php';
-require_once 'ProwlResponse.class.php';
 
-$oProwl = new ProwlConnector();
-$oMsg = new ProwlMessage();
+$oProwl = new \Prowl\Connector();
+$oMsg = new \Prowl\Message();
 
 // If you have one:
 // $oProwl->setProviderKey('MY_PROVIDER_KEY');

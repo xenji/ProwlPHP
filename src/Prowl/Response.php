@@ -21,11 +21,12 @@ namespace Prowl;
  * This class provides a response of the connector.
  *
  * @author Mario Mueller <mario.mueller.work@gmail.com>
- * @version 0.3.2
+ * @version 1.0.0
  * @package Prowl
  * @subpackage Response
  */
 class Response {
+	
 	/**
 	 * The raw response.
 	 * @since  0.3.1
@@ -71,13 +72,21 @@ class Response {
 	 */
 	private $iResetDate = null;
 
+
+	/**
+	 * Filter instance. This one is
+	 * passed to the message on push, if the message
+	 * has no filter set.
+	 * @var \Prowl\Security\Secureable
+	 */
+	private $oFilterInstance = null;
+
 	/**
 	 * Constructor made protected.
-	 * Use ProwlResponse::fromResponseXml().
+	 * Use \Prowl\Response::fromResponseXml().
 	 *
 	 * @since  0.3.1
-	 * @see ProwlResponse::fromResponseXml()
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
+	 * @see \Prowl\Response::fromResponseXml()
 	 */
 	private function __construct() {
 	}
@@ -86,28 +95,26 @@ class Response {
 	 * Takes the raw api response.
 	 *
 	 * @since  0.3.1
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param string $sXml
-	 * @return ProwlResponse
+	 * @return \Prowl\Response
 	 */
 	public static function fromResponseXml($sXml) {
 		$oResponse = new self();
 		$oResponse->sRawResponse = $sXml;
 		$oResponse->parseRawResponse();
 		return $oResponse;
-	} // function
+	}
 
 	/**
 	 * Parses the raw xml data.
 	 *
 	 * @since  0.3.1
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return void
 	 */
 	private function parseRawResponse() {
 		try {
-			$oSxmlResponse = new SimpleXMLElement($this->sRawResponse);
-		} catch (Exception $oException) {
+			$oSxmlResponse = new \SimpleXMLElement($this->sRawResponse);
+		} catch (\Exception $oException) {
 			$this->iReturnCode = 500;
 			return self::RESPONSE_NOK;
 		} // catch
@@ -123,14 +130,13 @@ class Response {
 			$this->iReturnCode = (int)$oSxmlResponse->error['code'];
 			return self::RESPONSE_NOK;
 		}
-	} // function
+	}
 
 	/**
 	 * Returns a boolean value indicating
 	 * if the response was an error or not.
 	 *
 	 * @since  0.3.1
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return boolean
 	 */
 	public function isError() {
@@ -139,7 +145,7 @@ class Response {
 		} else {
 			return true;
 		}
-	} // function
+	}
 
 	/**
 	 * Returns the corresponding error
@@ -151,7 +157,7 @@ class Response {
 	 */
 	public function getErrorAsString() {
 		return $this->getErrorByCode($this->iReturnCode);
-	} // function
+	}
 
 	/**
 	 * The remaining requests.
@@ -177,7 +183,6 @@ class Response {
 	 * Returns the error message to a given code.
 	 *
 	 * @since  0.3.1
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param integer $code
 	 * @return string
 	 */
@@ -202,6 +207,6 @@ class Response {
 				return 'Parameter value exceeds the maximum byte size.';
 			default:
 				return false;
-		} // switch response code
-	} // function
-} // class
+		}
+	}
+}

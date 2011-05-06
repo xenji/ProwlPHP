@@ -22,143 +22,166 @@ namespace Prowl;
  * to be send by the connector.
  *
  * @author Mario Mueller <mario.mueller.work@gmail.com>
- * @version 0.3.1
+ * @version 1.0.0
  * @package Prowl
  * @subpackage Message
- * @since 0.3.1
  */
-class ProwlMessage {
+class Message {
+	
 	/**
 	 * Your API keys. Please use the
 	 * setter to modify this.
 	 * @var array
 	 */
-	protected $aApiKeys = array();
+	private $aApiKeys = array();
 
 	/**
 	 * A priority value from -2 to 2
 	 * @var integer
 	 */
-	protected $iPriority = 0;
+	private $iPriority = 0;
 
 	/**
 	 * The application identifier.
 	 * @var string
 	 */
-	protected $sApplication = 'ProwlPHP';
+	private $sApplication = 'ProwlPHP';
 
 	/**
 	 * The event title.
 	 * @var string
 	 */
-	protected $sEvent = null;
+	private $sEvent = null;
 
 	/**
 	 * The event description.
 	 * @var string
 	 */
-	protected $sDescription = null;
+	private $sDescription = null;
+
+	/**
+	 * Filter instance. This one is
+	 * passed from the connection on push, if the message
+	 * has no filter set.
+	 * @var \Prowl\Security\Secureable
+	 */
+	private $oFilterIntance = null;
+
+	/**
+	 * Set a filter instance. If you do not need a filter, use the
+	 * Passthrough filter.
+	 *
+	 * @param \Prowl\Security\Secureable $oFilterInstance
+	 * @return \Prowl\Message
+	 */
+	public function setFilter(\Prowl\Security\Secureable $oFilterInstance) {
+		$this->oFilterIntance = $oFilterInstance;
+		return $this;
+	}
+
+	/**
+	 * Returns the filter instance, if set. It might return null
+	 * when no filter is set.
+	 *
+	 * @return Prowl\Security\Secureable 
+	 */
+	public function getFilter() {
+		return $this->oFilterIntance;
+	}
 
 	/**
 	 * Sets the event.
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @throws InvalidArgumentException
 	 * @param string $sEvent The event.
-	 * @return ProwlMessage
+	 * @return \Prowl\Message
 	 */
 	public function setEvent($sEvent) {
 		$sEvent = filter_var($sEvent, FILTER_SANITIZE_STRING);
-		$iStrlen = mb_strlen($sEvent, 'utf-8');
+		$iContentLength = mb_strlen($sEvent, 'utf-8');
 
-		if ($iStrlen > 1024) {
-			throw new InvalidArgumentException('Event length is limited to 1024 chars. Yours is ' . $iStrlen);
+		if ($iContentLength > 1024) {
+			throw new \InvalidArgumentException('Event length is limited to 1024 chars. Yours is ' . $iContentLength);
 		}
 
 		$this->sEvent = (string)$sEvent;
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Returns the event.
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return string
 	 */
 	public function getEvent() {
 		return $this->sEvent;
-	} // function
+	}
 
 	/**
 	 * Sets the application.
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 * @param string $sApp The name of the sending application.
-	 * @return ProwlMessage
+	 * @return \Prowl\Message
 	 */
 	public function setApplication($sApp) {
 		$sApp = filter_var($sApp, FILTER_SANITIZE_STRING);
-		$iStrlen = mb_strlen($sApp, 'utf-8');
+		$iContentLength = mb_strlen($sApp, 'utf-8');
 
-		if ($iStrlen > 254) {
-			throw new InvalidArgumentException('Application length is limited to 254 chars. Yours is ' . $iStrlen);
+		if ($iContentLength > 254) {
+			throw new \InvalidArgumentException('Application length is limited to 254 chars. Yours is ' . $iContentLength);
 		}
 
 		$this->sApplication = (string)$sApp;
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Returns the application string.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return string
 	 */
 	public function getApplication() {
 		return $this->sApplication;
-	} // function
+	}
 
 	/**
 	 * Sets the event description.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws InvalidArgumentException
-	 * @param string $sDescr The event description.
-	 * @return ProwlMessage
+	 * @throws \InvalidArgumentException
+	 * @param string $sDescription The event description.
+	 * @return \Prowl\Message
 	 */
-	public function setDescription($sDescr) {
-		$sDescr = filter_var($sDescr, FILTER_SANITIZE_STRING);
-		$iStrlen = mb_strlen($sDescr, 'utf-8');
+	public function setDescription($sDescription) {
+		$sDescription = filter_var($sDescription, FILTER_SANITIZE_STRING);
+		$iContentLength = mb_strlen($sDescription, 'utf-8');
 
-		if ($iStrlen > 10000) {
-			throw new InvalidArgumentException('Description is too long. Limit is 10.000, yours is ' . $iStrlen);
+		if ($iContentLength > 10000) {
+			throw new \InvalidArgumentException('Description is too long. Limit is 10.000, yours is ' . $iContentLength);
 		}
-		$this->sDescription = (string)$sDescr;
+		$this->sDescription = (string)$sDescription;
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Returns the description.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return string
 	 */
 	public function getDescription() {
 		return $this->sDescription;
-	} // function
+	}
 
 	/**
 	 * Sets the api key.
 	 * This method uses a fluent interface.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 * @param string $sKey An valid api key.
-	 * @return ProwlMessage
+	 * @return \Prowl\Message
 	 */
 	public function addApiKey($sKey) {
 		if (is_string($sKey) && sizeof($this->aApiKeys) < 6) {
 			$this->aApiKeys[] = (string)$sKey;
 		} else {
-			throw new InvalidArgumentException('The param was not a string or the limit of 5 keys is reached.');
+			throw new \InvalidArgumentException('The param was not a string or the limit of 5 keys is reached.');
 		}
 		return $this;
 	} // function
@@ -166,86 +189,80 @@ class ProwlMessage {
 	/**
 	 * Removes an api key from the receiver list.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws OutOfRangeException
+	 * @throws \OutOfRangeException
 	 * @param string $sKey
-	 * @return ProwlMessage
+	 * @return \Prowl\Message
 	 */
 	public function removeApiKey($sKey) {
 		$iIndex = array_search($sKey, $this->aApiKeys);
 		if ($iIndex === false) {
-			throw new OutOfRangeException('This API key does not exist in list.');
+			throw new \OutOfRangeException('This API key does not exist in list.');
 		} else {
 			unset($this->aApiKeys[$iIndex]);
 		}
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Returns all actual api keys as array.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return array
 	 */
 	public function getApiKeysAsArray() {
 		return $this->aApiKeys;
-	} // function
+	}
 
 	/**
 	 * Returns all actual api keys as string
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return string
 	 */
 	public function getApiKeysAsString() {
 		return implode(',', $this->getApiKeysAsArray());
-	} // function
+	}
 
 	/**
 	 * Sets the proirity (-2 to 2)
 	 * This method uses a fluent interface.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws InvalidArgumentException
-	 * @param integer $iPrio An signed integer from -2 to 2
-	 * @return Prowl
+	 * @throws \InvalidArgumentException
+	 * @param integer $iPriority An signed integer from -2 to 2
+	 * @return \Prowl\Message
 	 */
-	public function setPriority($iPrio) {
-		$mVal = filter_var($iPrio, FILTER_VALIDATE_INT);
+	public function setPriority($iPriority) {
+		$mVal = filter_var($iPriority, FILTER_VALIDATE_INT);
 
 		if (($mVal !== false) && ($mVal >= -2) && ($mVal <= 2)) {
 			$this->iPriority = $mVal;
 		} else {
-			throw new InvalidArgumentException('The param was not between -2 and 2 or even an integer.');
+			throw new \InvalidArgumentException('The param was not between -2 and 2 or even an integer.');
 		}
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Returns the priority as signed integer
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return integer
 	 */
 	public function getPriority() {
 		return $this->iPriority;
-	} // function
+	}
 
 	/**
 	 * Validates the basic needs of the prowl api.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws InvalidArgumentException
+	 * @throws \InvalidArgumentException
 	 * @return boolean
 	 */
 	public function validate() {
 		if (is_null($this->sEvent)) {
-			throw new InvalidArgumentException('Validation Error: Event is missing');
+			throw new \InvalidArgumentException('Validation Error: Event is missing');
 		}
 
 		if (sizeof($this->aApiKeys) == 0) {
-			throw new InvalidArgumentException('Validation Error: No api keys present.');
+			throw new \InvalidArgumentException('Validation Error: No api keys present.');
 		}
 		return true;
 	}
-} // class
+}

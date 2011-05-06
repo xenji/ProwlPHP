@@ -6,29 +6,35 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- */ 
+ */
 namespace Prowl;
 
 /**
  * Prowl Connector
  *
  * This class provides a connection to the prowl service
- * at <link>http://prowl.weks.net/</link>.
+ * at <link>http://www.prowlapp.com/</link>.
  *
- * @author Fenric <sandbox [at] fenric.co.uk>
- * @author Mario Mueller <mario.mueller.work@gmail.com> - Refactored on 23rd of Jan. 2010
- * @version 0.3.2
+ * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @version 1.0.0
  * @package Prowl
  * @subpackage Connector
  */
 class Connector {
+
+	/**
+	 * System version to send it with the client string
+	 * @var string
+	 */
+	protected $sVersion = "1.0.0";
+
 	/**
 	 * The cUrl connection
 	 * @var resource
@@ -91,7 +97,7 @@ class Connector {
 	/**
 	 * The last response that was
 	 * received from the API.
-	 * @var ProwlResponse
+	 * @var \Prowl\Response
 	 */
 	protected $oLastResponse = null;
 
@@ -107,15 +113,14 @@ class Connector {
 	 */
 	public function __construct() {
 		if (extension_loaded('curl') == false) {
-			throw new RuntimeException('cUrl Extension is not available.');
+			throw new \RuntimeException('cUrl Extension is not available.');
 		}
 
 		$curl_info = curl_version(); // Checks for cURL function and SSL version. Thanks Adrian Rollett!
 		if (empty($curl_info['ssl_version'])) {
-			throw new RuntimeException('Your cUrl Extension does not support SSL.');
+			throw new \RuntimeException('Your cUrl Extension does not support SSL.');
 		}
-
-	} // function
+	}
 
 	/**
 	 * Verifies the keys. This is optional but
@@ -128,8 +133,8 @@ class Connector {
 	 */
 	public function verify($sApikey, $sProvkey) {
 		$sReturn = $this->execute(sprintf($this->sVerifyContext, $sApikey, $sProvkey));
-		return ProwlResponse::fromResponseXml($sReturn);
-	} // function
+		return \Prowl\Response::fromResponseXml($sReturn);
+	}
 
 
 	/**
@@ -144,10 +149,10 @@ class Connector {
 		if (is_string($sKey)) {
 			$this->sProviderKey = $sKey;
 		} else {
-			throw new InvalidArgumentException('The param was not a string.');
+			throw new \InvalidArgumentException('The param was not a string.');
 		}
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Sets the post request identifier to true or false.
@@ -155,26 +160,25 @@ class Connector {
 	 *
 	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param boolean $bIsPost
-	 * @return Prowl
+	 * @return \Prowl\Connector
 	 */
 	public function setIsPostRequest($bIsPost) {
 		if (is_bool($bIsPost)) {
 			$this->bIsPostRequest = $bIsPost;
 		} else {
-			throw new InvalidArgumentException('The param was not a bool.');
+			throw new \InvalidArgumentException('The param was not a bool.');
 		}
-
 		return $this;
-	} // function
+	}
 
 	/**
 	 * Pushes a message to the given api key.
 	 *
 	 * @author Mario Mueller <mario.mueller@mac@me.com>
 	 * @param ProwlMessage $oMessage
-	 * @return ProwlResponse
+	 * @return \Prowl\Response
 	 */
-	public function push(ProwlMessage $oMessage) {
+	public function push(\Prowl\Message $oMessage) {
 		$oMessage->validate();
 
 		$aParams['apikey'] = $oMessage->getApiKeysAsString();
@@ -195,8 +199,7 @@ class Connector {
 		$sParams = http_build_query($aParams);
 		$sReturn = $this->execute($sContextUrl, $this->bIsPostRequest, $sParams);
 
-
-		$this->oLastResponse = ProwlResponse::fromResponseXml($sReturn);
+		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
 
 		return $this->oLastResponse;
 	}
@@ -211,7 +214,7 @@ class Connector {
 	 */
 	public function getRemaining() {
 		if (is_null($this->oLastResponse)) {
-			throw new RuntimeException('Cannot access last response. Did you made a request?');
+			throw new \RuntimeException('Cannot access last response. Did you made a request?');
 		}
 		return $this->oLastResponse->getRemaining();
 	}
@@ -225,7 +228,7 @@ class Connector {
 	 */
 	public function getResetDate() {
 		if (is_null($this->oLastResponse)) {
-			throw new RuntimeException('Cannot access last response. Did you made a request?');
+			throw new \RuntimeException('Cannot access last response. Did you made a request?');
 		}
 		return $this->oLastResponse->getResetDate();
 	}
@@ -271,7 +274,7 @@ class Connector {
 	 * @since  0.3.1
 	 * @param  string $sProxy			 The URL to a proxy server.
 	 * @param  string $sUserPassword	The Password for the server (opt.)
-	 * @return ProwlConnector
+	 * @return \Prowl\Connector
 	 */
 	public function setProxy($sProxy, $sUserPasswd = null) {
 		$mUrl = filter_var((string)$sProxy, FILTER_VALIDATE_URL);
@@ -281,8 +284,8 @@ class Connector {
 
 			if (is_string($sUserPasswd)) {
 				$this->sProxyPasswd = (string)$sUserPasswd;
-			} // if password is present
-		} // if proxy
+			}
+		}
 		return $this;
-	} // function
-} // class
+	}
+}
