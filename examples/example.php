@@ -20,7 +20,7 @@
  * @author Mario Mueller <mario.mueller.work@gmail.com>
  * @version 1.0.0
  */
-
+require_once dirname(__FILE__) . '/bootstrap.php';
 $oProwl = new \Prowl\Connector();
 $oMsg = new \Prowl\Message();
 
@@ -30,7 +30,7 @@ $oMsg = new \Prowl\Message();
 try {
 
 	// You can choose to pass a callback
-	$oProwl->getFilterCallback(function($sText) {
+	$oProwl->setFilterCallback(function($sText) {
 		return $sText;
 	});
 
@@ -50,7 +50,6 @@ try {
 	// You can ADD up to 5 api keys
 	// This is a Test Key, please use your own.
 	$oMsg->addApiKey('e0bf09a4cc20ae0bcd63b30b19031ef59a458634');
-
 	$oMsg->setEvent('My Event!');
 
 	// These are optional:
@@ -64,7 +63,7 @@ try {
 	} else {
 		print "Message sent." . PHP_EOL;
 		print "You have " . $oResponse->getRemaining() . " Messages left." . PHP_EOL;
-		print "Your counter will be resetted on " . date('Y-m-d H:i:s', $oResponse->getResetDate());
+		print "Your counter will be resetted on " . date('Y-m-d H:i:s', $oResponse->getResetDate()) . PHP_EOL;
 	}
 } catch (\InvalidArgumentException $oIAE) {
 	print $oIAE->getMessage();

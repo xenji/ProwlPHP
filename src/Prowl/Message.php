@@ -153,7 +153,6 @@ class Message {
 	 * @return \Prowl\Message
 	 */
 	public function setEvent($sEvent) {
-		$sEvent = filter_var($sEvent, FILTER_SANITIZE_STRING);
 		$iContentLength = mb_strlen($sEvent, 'utf-8');
 
 		if ($iContentLength > 1024) {
@@ -179,7 +178,6 @@ class Message {
 	 * @return \Prowl\Message
 	 */
 	public function setApplication($sApp) {
-		$sApp = filter_var($sApp, FILTER_SANITIZE_STRING);
 		$iContentLength = mb_strlen($sApp, 'utf-8');
 
 		if ($iContentLength > 254) {
@@ -207,7 +205,6 @@ class Message {
 	 * @return \Prowl\Message
 	 */
 	public function setDescription($sDescription) {
-		$sDescription = filter_var($sDescription, FILTER_SANITIZE_STRING);
 		$iContentLength = mb_strlen($sDescription, 'utf-8');
 
 		if ($iContentLength > 10000) {
@@ -235,10 +232,10 @@ class Message {
 	 * @return \Prowl\Message
 	 */
 	public function addApiKey($sKey) {
-		if (is_string($sKey) && sizeof($this->aApiKeys) < 6) {
+		if (is_string($sKey)) {
 			$this->aApiKeys[] = (string)$sKey;
 		} else {
-			throw new \InvalidArgumentException('The param was not a string or the limit of 5 keys is reached.');
+			throw new \InvalidArgumentException('The param was not a string.');
 		}
 		return $this;
 	} // function

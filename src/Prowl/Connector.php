@@ -235,6 +235,8 @@ class Connector {
 	 * @return \Prowl\Response
 	 */
 	public function push(\Prowl\Message $oMessage) {
+		// Messages must be sent as post
+		$this->setIsPostRequest(true);
 		$oMessage->validate();
 
 		if ($oMessage->getFilterCallback() == null) {
@@ -254,7 +256,6 @@ class Connector {
 			}
 		}
 
-
 		$aParams['apikey'] = $oMessage->getApiKeysAsString();
 		$aParams['providerkey'] = $this->sProviderKey;
 		$aParams['application'] = $oMessage->getApplication();
@@ -262,7 +263,7 @@ class Connector {
 		$aParams['description'] = $this->filter($oMessage, $oMessage->getDescription());
 		$aParams['priority'] = $oMessage->getPriority();
 
-		if ($oMessage->hasUrl()) {
+		if ($oMessage->getUrl() != null) {
 			$aParams['url'] = $oMessage->getUrl();
 		}
 
@@ -318,11 +319,11 @@ class Connector {
 		}
 
 		$aParams = array('providerkey' => $this->sProviderKey);
-		$sRequestUrl = $this->sApiUrl . 'retrieve/token?';
+		$sRequestUrl = 'retrieve/token?';
 		$sParams = http_build_query($aParams);
 
 		// This request is GET-only.
-		$sReturn = $this->execute($sRequestUrl, false, $sParams);
+		$sReturn = $this->execute($sRequestUrl, $this->bIsPostRequest, $sParams);
 		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
 
 		return $this->oLastResponse;
@@ -342,11 +343,11 @@ class Connector {
 		}
 
 		$aParams = array('providerkey' => $this->sProviderKey, 'token' => $sToken);
-		$sRequestUrl = $this->sApiUrl . 'retrieve/apikey?';
+		$sRequestUrl = 'retrieve/apikey?';
 		$sParams = http_build_query($aParams);
 
 		// This request is GET-only.
-		$sReturn = $this->execute($sRequestUrl, false, $sParams);
+		$sReturn = $this->execute($sRequestUrl, $this->bIsPostRequest, $sParams);
 		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
 
 		return $this->oLastResponse;
@@ -390,7 +391,13 @@ class Connector {
 	 * @return string
 	 */
 	protected function execute($sUrl, $bIsPostRequest = false, $sParams = null) {
+
+		if ($bIsPostRequest == false) {
+			$sUrl .= $sParams;
+		}
+
 		$this->rCurl = curl_init($this->sApiUrl . $sUrl);
+
 		curl_setopt($this->rCurl, CURLOPT_HEADER, 0);
 		curl_setopt($this->rCurl, CURLOPT_USERAGENT, "Prowl PHP Client/" . $this->sVersion);
 		curl_setopt($this->rCurl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
