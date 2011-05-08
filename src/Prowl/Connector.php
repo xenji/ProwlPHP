@@ -110,12 +110,20 @@ class Connector {
 	private $oFilterIntance = null;
 
 	/**
+	 * An alternative way to filter. You can set a
+	 * closure instead of a filter instance. If both are
+	 * set, the closure will be preferred.
+	 *
+	 * @var \Closure
+	 */
+	private $cFilterCallback = null;
+
+	/**
 	 * ProwlConnector.class provides access to the
 	 * webservice interface of Prowl by using
 	 * cUrl + SSL. Use the setters of this class
 	 * to provide the mandatory parameters.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com> - Refactored on 23rd of Jan. 2010
 	 * @throws RuntimeException
 	 * @return void
 	 */
@@ -128,6 +136,25 @@ class Connector {
 		if (empty($curl_info['ssl_version'])) {
 			throw new \RuntimeException('Your cUrl Extension does not support SSL.');
 		}
+	}
+
+	/**
+	 * An alternative way to filter. You can set a
+	 * closure instead of a filter instance. If both are
+	 * set, the closure will be preferred.
+	 * @param \Closure $cCallback
+	 * @return void
+	 */
+	public function setFilterCallback(\Closure $cCallback) {
+		$this->cFilterCallback = $cCallback;
+	}
+
+	/**
+	 * Getter for the filter closure.
+	 * @return \Closure
+	 */
+	public function getFilterCallback() {
+		return $this->cFilterCallback;
 	}
 
 	/**
@@ -210,20 +237,29 @@ class Connector {
 	public function push(\Prowl\Message $oMessage) {
 		$oMessage->validate();
 
-		if ($oMessage->getFilter() == null) {
-			if ($this->getFilter() != null) {
-				$oMessage->setFilter($this->getFilter());
-			} else {
-				throw new \RuntimeException("No filter found. ".
-											"Please set a filter either in the message or in the connector");
+		if ($oMessage->getFilterCallback() == null) {
+			if ($this->getFilterCallback() != null) {
+				$oMessage->setFilterCallback($this->getFilterCallback());
 			}
 		}
+
+		// if the previous routine did not set a callback, try to set the filter instance.
+		if ($oMessage->getFilterCallback() == null) {
+			if ($oMessage->getFilter() == null) {
+				if ($this->getFilter() != null) {
+					$oMessage->setFilter($this->getFilter());
+				} else {
+					throw new \RuntimeException("No filter found. " . "Please set a filter either in the message or in the connector");
+				}
+			}
+		}
+
 
 		$aParams['apikey'] = $oMessage->getApiKeysAsString();
 		$aParams['providerkey'] = $this->sProviderKey;
 		$aParams['application'] = $oMessage->getApplication();
-		$aParams['event'] = $oMessage->getEvent();
-		$aParams['description'] = $oMessage->getDescription();
+		$aParams['event'] = $this->filter($oMessage, $oMessage->getEvent());
+		$aParams['description'] = $this->filter($oMessage, $oMessage->getDescription());
 		$aParams['priority'] = $oMessage->getPriority();
 
 		if ($oMessage->hasUrl()) {
@@ -241,6 +277,76 @@ class Connector {
 		$sParams = http_build_query($aParams);
 		$sReturn = $this->execute($sContextUrl, $this->bIsPostRequest, $sParams);
 
+		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
+
+		return $this->oLastResponse;
+	}
+
+	/**
+	 * Decides based on the presence of a closure or a filter
+	 * which way to go for filtering.
+	 *
+	 * @throws \RuntimeException
+	 * @param \Prowl\Message $oMessage
+	 * @param string $sContent
+	 * @return string
+	 */
+	private function filter(\Prowl\Message $oMessage, $sContent) {
+		if ($oMessage->getFilterCallback() != null) {
+			$cFilter = $oMessage->getFilterCallback();
+			return $cFilter($sContent);
+		} elseif ($oMessage->getFilter() != null) {
+			$oFilter = $oMessage->getFilter();
+			return $oFilter->filter($sContent);
+		} else {
+			throw new \RuntimeException("No filter set, abort.");
+		}
+	}
+
+
+	/**
+	 * Requests a token for a user registration. This is the first step.
+	 * Be sure to set the provider key first! This call doesn't lower your
+	 * global remaining call-count.
+	 *
+	 * @throws \RuntimeException
+	 * @return \Prowl\Response
+	 */
+	public function retrieveToken() {
+		if (empty($this->sProviderKey)) {
+			throw new \RuntimeException("Cannot execute retrieve/token without a provider key.");
+		}
+
+		$aParams = array('providerkey' => $this->sProviderKey);
+		$sRequestUrl = $this->sApiUrl . 'retrieve/token?';
+		$sParams = http_build_query($aParams);
+
+		// This request is GET-only.
+		$sReturn = $this->execute($sRequestUrl, false, $sParams);
+		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
+
+		return $this->oLastResponse;
+	}
+
+	/**
+	 * Requests a token for a user registration. This is the first step.
+	 * Be sure to set the provider key first! This call doesn't lower your
+	 * global remaining call-count.
+	 *
+	 * @throws \RuntimeException
+	 * @return \Prowl\Response
+	 */
+	public function retrieveApiKey($sToken) {
+		if (empty($this->sProviderKey)) {
+			throw new \RuntimeException("Cannot execute retrieve/apikey without a provider key.");
+		}
+
+		$aParams = array('providerkey' => $this->sProviderKey, 'token' => $sToken);
+		$sRequestUrl = $this->sApiUrl . 'retrieve/apikey?';
+		$sParams = http_build_query($aParams);
+
+		// This request is GET-only.
+		$sReturn = $this->execute($sRequestUrl, false, $sParams);
 		$this->oLastResponse = \Prowl\Response::fromResponseXml($sReturn);
 
 		return $this->oLastResponse;
@@ -286,7 +392,7 @@ class Connector {
 	protected function execute($sUrl, $bIsPostRequest = false, $sParams = null) {
 		$this->rCurl = curl_init($this->sApiUrl . $sUrl);
 		curl_setopt($this->rCurl, CURLOPT_HEADER, 0);
-		curl_setopt($this->rCurl, CURLOPT_USERAGENT, "ProwlConnector.class/" . $this->sVersion);
+		curl_setopt($this->rCurl, CURLOPT_USERAGENT, "Prowl PHP Client/" . $this->sVersion);
 		curl_setopt($this->rCurl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
 		curl_setopt($this->rCurl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($this->rCurl, CURLOPT_RETURNTRANSFER, 1);

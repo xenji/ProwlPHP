@@ -18,7 +18,7 @@
 /**
  * Example File
  * @author Mario Mueller <mario.mueller.work@gmail.com>
- * @version 0.3.2
+ * @version 1.0.0
  */
 
 $oProwl = new \Prowl\Connector();
@@ -28,6 +28,22 @@ $oMsg = new \Prowl\Message();
 // $oProwl->setProviderKey('MY_PROVIDER_KEY');
 
 try {
+
+	// You can choose to pass a callback
+	$oProwl->getFilterCallback(function($sText) {
+		return $sText;
+	});
+
+	// or set a filter instance:
+	// $oFilter = new \Prowl\Security\PassthroughFilterImpl();
+	// $oProwl->setFilter($oFilter);
+
+	/*
+	 * Both, the closure and the instance, can be passed to the connector
+	 * or to each message. Setting it at the connector passes the closure or the instance down
+	 * to each message on push() execution - but only if the message has neither of them set.
+	 */
+
 	$oProwl->setIsPostRequest(true);
 	$oMsg->setPriority(0);
 
@@ -50,8 +66,8 @@ try {
 		print "You have " . $oResponse->getRemaining() . " Messages left." . PHP_EOL;
 		print "Your counter will be resetted on " . date('Y-m-d H:i:s', $oResponse->getResetDate());
 	}
-} catch (InvalidArgumentException $oIAE) {
+} catch (\InvalidArgumentException $oIAE) {
 	print $oIAE->getMessage();
-} catch (OutOfRangeException $oOORE) {
+} catch (\OutOfRangeException $oOORE) {
 	print $oOORE->getMessage();
 }

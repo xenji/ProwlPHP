@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,7 +27,7 @@ namespace Prowl;
  * @subpackage Message
  */
 class Message {
-	
+
 	/**
 	 * Your API keys. Please use the
 	 * setter to modify this.
@@ -66,6 +66,15 @@ class Message {
 	 * @var \Prowl\Security\Secureable
 	 */
 	private $oFilterIntance = null;
+
+	/**
+	 * An alternative way to filter. You can set a
+	 * closure instead of a filter instance. If both are
+	 * set, the closure will be preferred.
+	 *
+	 * @var \Closure
+	 */
+	private $cFilterCallback = null;
 
 	/**
 	 * An Url to send with the message for redirecting.
@@ -112,10 +121,29 @@ class Message {
 	 * Returns the filter instance, if set. It might return null
 	 * when no filter is set.
 	 *
-	 * @return Prowl\Security\Secureable 
+	 * @return \Prowl\Security\Secureable
 	 */
 	public function getFilter() {
 		return $this->oFilterIntance;
+	}
+
+	/**
+	 * An alternative way to filter. You can set a
+	 * closure instead of a filter instance. If both are
+	 * set, the closure will be preferred.
+	 * @param \Closure $cCallback
+	 * @return void
+	 */
+	public function setFilterCallback(\Closure $cCallback) {
+		$this->cFilterCallback = $cCallback;
+	}
+
+	/**
+	 * Getter for the filter closure.
+	 * @return \Closure
+	 */
+	public function getFilterCallback() {
+		return $this->cFilterCallback;
 	}
 
 	/**

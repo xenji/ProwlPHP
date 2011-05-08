@@ -72,14 +72,23 @@ class Response {
 	 */
 	private $iResetDate = null;
 
+	/**
+	 * Token from the retrieve/token request
+	 * @var string
+	 */
+	private $sToken = null;
 
 	/**
-	 * Filter instance. This one is
-	 * passed to the message on push, if the message
-	 * has no filter set.
-	 * @var \Prowl\Security\Secureable
+	 * Url from the retrieve/token request
+	 * @var string
 	 */
-	private $oFilterInstance = null;
+	private $sTokenUrl = null;
+
+	/**
+	 * Api key from a retrieve/apikey request
+	 * @var string
+	 */
+	private $sApiKey = null;
 
 	/**
 	 * Constructor made protected.
@@ -125,6 +134,15 @@ class Response {
 			$this->iReturnCode = (int)$oSxmlResponse->success['code'];
 			$this->iRemaining = (int)$oSxmlResponse->success['remaining'];
 			$this->iResetDate = (int)$oSxmlResponse->success['resetdate'];
+
+			if ($oSxmlResponse->retrieve != null) {
+				if ($oSxmlResponse->retrieve['token'] != null) {
+					$this->sToken =	$oSxmlResponse->retrieve['token'];
+					$this->sTokenUrl = $oSxmlResponse->retrieve['url'];
+				} elseif ($oSxmlResponse->retrieve['apikey'] != null) {
+					$this->sApiKey = (string)$oSxmlResponse->retrieve['apikey'];
+				}
+			}
 			return self::RESPONSE_OK;
 		} else {
 			$this->iReturnCode = (int)$oSxmlResponse->error['code'];
@@ -179,6 +197,40 @@ class Response {
 		return $this->iResetDate;
 	}
 
+	/**
+	 * The API key. This one is filled only if you
+	 * requested a token and api key.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function getApiKey() {
+		return $this->sApiKey;
+	}
+
+	/**
+	 * Returns the token from a retrieve request. This one
+	 * is null when you just sent a message.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function getToken() {
+		return $this->sToken;
+	}
+
+	/**
+	 * The token url to redirect the user to.
+	 * This one is filled only if you made a retrieve/token
+	 * request.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function getTokenUrl() {
+		return $this->sTokenUrl;
+	}
+	
 	/**
 	 * Returns the error message to a given code.
 	 *
