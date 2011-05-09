@@ -2,14 +2,15 @@
 
 ## License
 The project source forked from Fenric had no license information. My modifications, which is a rewrite of 80-90% of
-the original source, is published under Apache 2.0 License. Read the LICENSE file for further information.
+the original source, are published under Apache 2.0 License. Read the LICENSE file for further information.
 
 ## Requirements
 - PHP 5.3
 - cURL with SSL support.
 
 ## Important
-Versions below 1.0.0 support PHP 5.2, from release 1.0.0 on, only PHP 5.3 will be supported.
+Versions below 1.0.0 support PHP 5.2, from release 1.0.0 on PHP 5.3 will be supported exclusively. You can use the 0.3.3 branch,
+if you really need support for PHP 5.2, but I will only handle bug related issues on that branch, no feature requests.
 
 ## Documentation
 This project is badly documented at the moment. You can find the API docs on [this repos GitHub pages](http://xenji.github.com/ProwlPHP/).
