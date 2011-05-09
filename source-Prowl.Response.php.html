@@ -6,7 +6,7 @@
 
 	<title>Prowl/Response.php</title>
 
-	<link rel="stylesheet" href="resources/style.css?v=2011050909" type="text/css" media="all" />
+	<link rel="stylesheet" href="resources/style.css?v=2011050910" type="text/css" media="all" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />	<script type="text/javascript" src="resources/combined.js"></script>
 	<script type="text/javascript" src="allclasses.js"></script>
 </head>
@@ -83,7 +83,7 @@
 </span><a href="#20" id="20" class="l"> 20: </a><span class="php-comment"> *
 </span><a href="#21" id="21" class="l"> 21: </a><span class="php-comment"> * This class provides a response of the connector.
 </span><a href="#22" id="22" class="l"> 22: </a><span class="php-comment"> *
-</span><a href="#23" id="23" class="l"> 23: </a><span class="php-comment"> * @author Mario Mueller &lt;mario.mueller.work@gmail.com&gt;
+</span><a href="#23" id="23" class="l"> 23: </a><span class="php-comment"> * @author Mario Mueller &lt;mario.mueller.work at gmail.com&gt;
 </span><a href="#24" id="24" class="l"> 24: </a><span class="php-comment"> * @version 1.0.0
 </span><a href="#25" id="25" class="l"> 25: </a><span class="php-comment"> * @package Prowl
 </span><a href="#26" id="26" class="l"> 26: </a><span class="php-comment"> * @subpackage Response
@@ -233,98 +233,97 @@
 </span><a href="#170" id="170" class="l">170: </a><span class="php-comment">     * message.
 </span><a href="#171" id="171" class="l">171: </a><span class="php-comment">     *
 </span><a href="#172" id="172" class="l">172: </a><span class="php-comment">     * @since  0.3.1
-</span><a href="#173" id="173" class="l">173: </a><span class="php-comment">     * @author Mario Mueller &lt;mario.mueller.work@gmail.com&gt;
-</span><a href="#174" id="174" class="l">174: </a><span class="php-comment">     * @return string
-</span><a href="#175" id="175" class="l">175: </a><span class="php-comment">     */</span>
-<a href="#176" id="176" class="l">176: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getErrorAsString() {
-<a href="#177" id="177" class="l">177: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getErrorByCode(<span class="php-var">$this</span>-&gt;iReturnCode);
-<a href="#178" id="178" class="l">178: </a>    }
-<a href="#179" id="179" class="l">179: </a>
-<a href="#180" id="180" class="l">180: </a>    <span class="php-comment">/**
-</span><a href="#181" id="181" class="l">181: </a><span class="php-comment">     * The remaining requests.
-</span><a href="#182" id="182" class="l">182: </a><span class="php-comment">     *
-</span><a href="#183" id="183" class="l">183: </a><span class="php-comment">     * @since  0.3.1
-</span><a href="#184" id="184" class="l">184: </a><span class="php-comment">     * @return integer
-</span><a href="#185" id="185" class="l">185: </a><span class="php-comment">     */</span>
-<a href="#186" id="186" class="l">186: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getRemaining() {
-<a href="#187" id="187" class="l">187: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;iRemaining;
-<a href="#188" id="188" class="l">188: </a>    }
-<a href="#189" id="189" class="l">189: </a>
-<a href="#190" id="190" class="l">190: </a>    <span class="php-comment">/**
-</span><a href="#191" id="191" class="l">191: </a><span class="php-comment">     * The reset date.
-</span><a href="#192" id="192" class="l">192: </a><span class="php-comment">     *
-</span><a href="#193" id="193" class="l">193: </a><span class="php-comment">     * @since  0.3.1
-</span><a href="#194" id="194" class="l">194: </a><span class="php-comment">     * @return integer
-</span><a href="#195" id="195" class="l">195: </a><span class="php-comment">     */</span>
-<a href="#196" id="196" class="l">196: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getResetDate() {
-<a href="#197" id="197" class="l">197: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;iResetDate;
-<a href="#198" id="198" class="l">198: </a>    }
-<a href="#199" id="199" class="l">199: </a>
-<a href="#200" id="200" class="l">200: </a>    <span class="php-comment">/**
-</span><a href="#201" id="201" class="l">201: </a><span class="php-comment">     * The API key. This one is filled only if you
-</span><a href="#202" id="202" class="l">202: </a><span class="php-comment">     * requested a token and api key.
-</span><a href="#203" id="203" class="l">203: </a><span class="php-comment">     *
-</span><a href="#204" id="204" class="l">204: </a><span class="php-comment">     * @since 1.0.0
-</span><a href="#205" id="205" class="l">205: </a><span class="php-comment">     * @return string
-</span><a href="#206" id="206" class="l">206: </a><span class="php-comment">     */</span>
-<a href="#207" id="207" class="l">207: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getApiKey() {
-<a href="#208" id="208" class="l">208: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sApiKey;
-<a href="#209" id="209" class="l">209: </a>    }
-<a href="#210" id="210" class="l">210: </a>
-<a href="#211" id="211" class="l">211: </a>    <span class="php-comment">/**
-</span><a href="#212" id="212" class="l">212: </a><span class="php-comment">     * Returns the token from a retrieve request. This one
-</span><a href="#213" id="213" class="l">213: </a><span class="php-comment">     * is null when you just sent a message.
-</span><a href="#214" id="214" class="l">214: </a><span class="php-comment">     *
-</span><a href="#215" id="215" class="l">215: </a><span class="php-comment">     * @since 1.0.0
-</span><a href="#216" id="216" class="l">216: </a><span class="php-comment">     * @return string
-</span><a href="#217" id="217" class="l">217: </a><span class="php-comment">     */</span>
-<a href="#218" id="218" class="l">218: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getToken() {
-<a href="#219" id="219" class="l">219: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sToken;
-<a href="#220" id="220" class="l">220: </a>    }
-<a href="#221" id="221" class="l">221: </a>
-<a href="#222" id="222" class="l">222: </a>    <span class="php-comment">/**
-</span><a href="#223" id="223" class="l">223: </a><span class="php-comment">     * The token url to redirect the user to.
-</span><a href="#224" id="224" class="l">224: </a><span class="php-comment">     * This one is filled only if you made a retrieve/token
-</span><a href="#225" id="225" class="l">225: </a><span class="php-comment">     * request.
-</span><a href="#226" id="226" class="l">226: </a><span class="php-comment">     *
-</span><a href="#227" id="227" class="l">227: </a><span class="php-comment">     * @since 1.0.0
-</span><a href="#228" id="228" class="l">228: </a><span class="php-comment">     * @return string
-</span><a href="#229" id="229" class="l">229: </a><span class="php-comment">     */</span>
-<a href="#230" id="230" class="l">230: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTokenUrl() {
-<a href="#231" id="231" class="l">231: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sTokenUrl;
-<a href="#232" id="232" class="l">232: </a>    }
-<a href="#233" id="233" class="l">233: </a>    
-<a href="#234" id="234" class="l">234: </a>    <span class="php-comment">/**
-</span><a href="#235" id="235" class="l">235: </a><span class="php-comment">     * Returns the error message to a given code.
-</span><a href="#236" id="236" class="l">236: </a><span class="php-comment">     *
-</span><a href="#237" id="237" class="l">237: </a><span class="php-comment">     * @since  0.3.1
-</span><a href="#238" id="238" class="l">238: </a><span class="php-comment">     * @param integer $code
-</span><a href="#239" id="239" class="l">239: </a><span class="php-comment">     * @return string
-</span><a href="#240" id="240" class="l">240: </a><span class="php-comment">     */</span>
-<a href="#241" id="241" class="l">241: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getErrorByCode(<span class="php-var">$iCode</span>) {
-<a href="#242" id="242" class="l">242: </a>        <span class="php-comment">//TODO: Find a better way to implement error messages. 
-</span><a href="#243" id="243" class="l">243: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$iCode</span>) {
-<a href="#244" id="244" class="l">244: </a>            <span class="php-keyword1">case</span> <span class="php-num">200</span>:
-<a href="#245" id="245" class="l">245: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Request Successful.'</span>;
-<a href="#246" id="246" class="l">246: </a>            <span class="php-keyword1">case</span> <span class="php-num">400</span>:
-<a href="#247" id="247" class="l">247: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Bad request, the parameters you provided did not validate.'</span>;
-<a href="#248" id="248" class="l">248: </a>            <span class="php-keyword1">case</span> <span class="php-num">401</span>:
-<a href="#249" id="249" class="l">249: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'The API key given is not valid and does not correspond to a user.'</span>;
-<a href="#250" id="250" class="l">250: </a>            <span class="php-keyword1">case</span> <span class="php-num">405</span>:
-<a href="#251" id="251" class="l">251: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Method not allowed, you attempted to use a non-SSL connection to Prowl.'</span>;
-<a href="#252" id="252" class="l">252: </a>            <span class="php-keyword1">case</span> <span class="php-num">406</span>:
-<a href="#253" id="253" class="l">253: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Your IP address has exceeded the API limit.'</span>;
-<a href="#254" id="254" class="l">254: </a>            <span class="php-keyword1">case</span> <span class="php-num">500</span>:
-<a href="#255" id="255" class="l">255: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Internal server error, something failed to execute properly on the Prowl side.'</span>;
-<a href="#256" id="256" class="l">256: </a>            <span class="php-keyword1">case</span> <span class="php-num">10000</span>:
-<a href="#257" id="257" class="l">257: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'cURL library missing vital functions or does not support SSL. cURL w/SSL is required to execute requests.'</span>;
-<a href="#258" id="258" class="l">258: </a>            <span class="php-keyword1">case</span> <span class="php-num">10001</span>:
-<a href="#259" id="259" class="l">259: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Parameter value exceeds the maximum byte size.'</span>;
-<a href="#260" id="260" class="l">260: </a>            <span class="php-keyword1">default</span>:
-<a href="#261" id="261" class="l">261: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-<a href="#262" id="262" class="l">262: </a>        }
-<a href="#263" id="263" class="l">263: </a>    }
-<a href="#264" id="264" class="l">264: </a>}</code></pre>
+</span><a href="#173" id="173" class="l">173: </a><span class="php-comment">     * @return string
+</span><a href="#174" id="174" class="l">174: </a><span class="php-comment">     */</span>
+<a href="#175" id="175" class="l">175: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getErrorAsString() {
+<a href="#176" id="176" class="l">176: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getErrorByCode(<span class="php-var">$this</span>-&gt;iReturnCode);
+<a href="#177" id="177" class="l">177: </a>    }
+<a href="#178" id="178" class="l">178: </a>
+<a href="#179" id="179" class="l">179: </a>    <span class="php-comment">/**
+</span><a href="#180" id="180" class="l">180: </a><span class="php-comment">     * The remaining requests.
+</span><a href="#181" id="181" class="l">181: </a><span class="php-comment">     *
+</span><a href="#182" id="182" class="l">182: </a><span class="php-comment">     * @since  0.3.1
+</span><a href="#183" id="183" class="l">183: </a><span class="php-comment">     * @return integer
+</span><a href="#184" id="184" class="l">184: </a><span class="php-comment">     */</span>
+<a href="#185" id="185" class="l">185: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getRemaining() {
+<a href="#186" id="186" class="l">186: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;iRemaining;
+<a href="#187" id="187" class="l">187: </a>    }
+<a href="#188" id="188" class="l">188: </a>
+<a href="#189" id="189" class="l">189: </a>    <span class="php-comment">/**
+</span><a href="#190" id="190" class="l">190: </a><span class="php-comment">     * The reset date.
+</span><a href="#191" id="191" class="l">191: </a><span class="php-comment">     *
+</span><a href="#192" id="192" class="l">192: </a><span class="php-comment">     * @since  0.3.1
+</span><a href="#193" id="193" class="l">193: </a><span class="php-comment">     * @return integer
+</span><a href="#194" id="194" class="l">194: </a><span class="php-comment">     */</span>
+<a href="#195" id="195" class="l">195: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getResetDate() {
+<a href="#196" id="196" class="l">196: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;iResetDate;
+<a href="#197" id="197" class="l">197: </a>    }
+<a href="#198" id="198" class="l">198: </a>
+<a href="#199" id="199" class="l">199: </a>    <span class="php-comment">/**
+</span><a href="#200" id="200" class="l">200: </a><span class="php-comment">     * The API key. This one is filled only if you
+</span><a href="#201" id="201" class="l">201: </a><span class="php-comment">     * requested a token and api key.
+</span><a href="#202" id="202" class="l">202: </a><span class="php-comment">     *
+</span><a href="#203" id="203" class="l">203: </a><span class="php-comment">     * @since 1.0.0
+</span><a href="#204" id="204" class="l">204: </a><span class="php-comment">     * @return string
+</span><a href="#205" id="205" class="l">205: </a><span class="php-comment">     */</span>
+<a href="#206" id="206" class="l">206: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getApiKey() {
+<a href="#207" id="207" class="l">207: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sApiKey;
+<a href="#208" id="208" class="l">208: </a>    }
+<a href="#209" id="209" class="l">209: </a>
+<a href="#210" id="210" class="l">210: </a>    <span class="php-comment">/**
+</span><a href="#211" id="211" class="l">211: </a><span class="php-comment">     * Returns the token from a retrieve request. This one
+</span><a href="#212" id="212" class="l">212: </a><span class="php-comment">     * is null when you just sent a message.
+</span><a href="#213" id="213" class="l">213: </a><span class="php-comment">     *
+</span><a href="#214" id="214" class="l">214: </a><span class="php-comment">     * @since 1.0.0
+</span><a href="#215" id="215" class="l">215: </a><span class="php-comment">     * @return string
+</span><a href="#216" id="216" class="l">216: </a><span class="php-comment">     */</span>
+<a href="#217" id="217" class="l">217: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getToken() {
+<a href="#218" id="218" class="l">218: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sToken;
+<a href="#219" id="219" class="l">219: </a>    }
+<a href="#220" id="220" class="l">220: </a>
+<a href="#221" id="221" class="l">221: </a>    <span class="php-comment">/**
+</span><a href="#222" id="222" class="l">222: </a><span class="php-comment">     * The token url to redirect the user to.
+</span><a href="#223" id="223" class="l">223: </a><span class="php-comment">     * This one is filled only if you made a retrieve/token
+</span><a href="#224" id="224" class="l">224: </a><span class="php-comment">     * request.
+</span><a href="#225" id="225" class="l">225: </a><span class="php-comment">     *
+</span><a href="#226" id="226" class="l">226: </a><span class="php-comment">     * @since 1.0.0
+</span><a href="#227" id="227" class="l">227: </a><span class="php-comment">     * @return string
+</span><a href="#228" id="228" class="l">228: </a><span class="php-comment">     */</span>
+<a href="#229" id="229" class="l">229: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTokenUrl() {
+<a href="#230" id="230" class="l">230: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;sTokenUrl;
+<a href="#231" id="231" class="l">231: </a>    }
+<a href="#232" id="232" class="l">232: </a>    
+<a href="#233" id="233" class="l">233: </a>    <span class="php-comment">/**
+</span><a href="#234" id="234" class="l">234: </a><span class="php-comment">     * Returns the error message to a given code.
+</span><a href="#235" id="235" class="l">235: </a><span class="php-comment">     *
+</span><a href="#236" id="236" class="l">236: </a><span class="php-comment">     * @since  0.3.1
+</span><a href="#237" id="237" class="l">237: </a><span class="php-comment">     * @param integer $iCode
+</span><a href="#238" id="238" class="l">238: </a><span class="php-comment">     * @return string
+</span><a href="#239" id="239" class="l">239: </a><span class="php-comment">     */</span>
+<a href="#240" id="240" class="l">240: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getErrorByCode(<span class="php-var">$iCode</span>) {
+<a href="#241" id="241" class="l">241: </a>        <span class="php-comment">//TODO: Find a better way to implement error messages. 
+</span><a href="#242" id="242" class="l">242: </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$iCode</span>) {
+<a href="#243" id="243" class="l">243: </a>            <span class="php-keyword1">case</span> <span class="php-num">200</span>:
+<a href="#244" id="244" class="l">244: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Request Successful.'</span>;
+<a href="#245" id="245" class="l">245: </a>            <span class="php-keyword1">case</span> <span class="php-num">400</span>:
+<a href="#246" id="246" class="l">246: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Bad request, the parameters you provided did not validate.'</span>;
+<a href="#247" id="247" class="l">247: </a>            <span class="php-keyword1">case</span> <span class="php-num">401</span>:
+<a href="#248" id="248" class="l">248: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'The API key given is not valid and does not correspond to a user.'</span>;
+<a href="#249" id="249" class="l">249: </a>            <span class="php-keyword1">case</span> <span class="php-num">405</span>:
+<a href="#250" id="250" class="l">250: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Method not allowed, you attempted to use a non-SSL connection to Prowl.'</span>;
+<a href="#251" id="251" class="l">251: </a>            <span class="php-keyword1">case</span> <span class="php-num">406</span>:
+<a href="#252" id="252" class="l">252: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Your IP address has exceeded the API limit.'</span>;
+<a href="#253" id="253" class="l">253: </a>            <span class="php-keyword1">case</span> <span class="php-num">500</span>:
+<a href="#254" id="254" class="l">254: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Internal server error, something failed to execute properly on the Prowl side.'</span>;
+<a href="#255" id="255" class="l">255: </a>            <span class="php-keyword1">case</span> <span class="php-num">10000</span>:
+<a href="#256" id="256" class="l">256: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'cURL library missing vital functions or does not support SSL. cURL w/SSL is required to execute requests.'</span>;
+<a href="#257" id="257" class="l">257: </a>            <span class="php-keyword1">case</span> <span class="php-num">10001</span>:
+<a href="#258" id="258" class="l">258: </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Parameter value exceeds the maximum byte size.'</span>;
+<a href="#259" id="259" class="l">259: </a>            <span class="php-keyword1">default</span>:
+<a href="#260" id="260" class="l">260: </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+<a href="#261" id="261" class="l">261: </a>        }
+<a href="#262" id="262" class="l">262: </a>    }
+<a href="#263" id="263" class="l">263: </a>}</code></pre>
 
 	<div id="footer">
 		ProwlPHPDoc generated by <a href="http://apigen.org">ApiGen</a>
