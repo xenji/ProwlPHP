@@ -11,5 +11,13 @@ the original source, is published under Apache 2.0 License. Read the LICENSE fil
 ## Important
 Versions below 1.0.0 support PHP 5.2, from release 1.0.0 on, only PHP 5.3 will be supported.
 
+## Documentation
+This project is badly documented at the moment. You can find the API docs on [this repos GitHub pages](http://xenji.github.com/ProwlPHP/).
+The wiki at Fenric's repo has been switched off so I have to write the docs from the scratch. Please visit the wiki pages
+from time to time to get updates. In the meantime you can take a look at the example.php, located in the examples directory.
+This file shows the main functionality, but no extra stuff.
+
+**Please remember to you use your own API keys - in the examples and in the unit tests. Thank you for not spamming me.**
+
 ## Changelog
 See the issues tab and the corresponding milestones for changelog information.
