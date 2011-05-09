@@ -20,7 +20,7 @@ namespace Prowl;
  *
  * This class provides a response of the connector.
  *
- * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @author Mario Mueller <mario.mueller.work at gmail.com>
  * @version 1.0.0
  * @package Prowl
  * @subpackage Response
@@ -170,7 +170,6 @@ class Response {
 	 * message.
 	 *
 	 * @since  0.3.1
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @return string
 	 */
 	public function getErrorAsString() {
@@ -235,7 +234,7 @@ class Response {
 	 * Returns the error message to a given code.
 	 *
 	 * @since  0.3.1
-	 * @param integer $code
+	 * @param integer $iCode
 	 * @return string
 	 */
 	private function getErrorByCode($iCode) {

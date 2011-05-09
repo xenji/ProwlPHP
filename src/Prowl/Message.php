@@ -21,7 +21,7 @@ namespace Prowl;
  * This class represents a single message
  * to be send by the connector.
  *
- * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @author Mario Mueller <mario.mueller.work at gmail.com>
  * @version 1.0.0
  * @package Prowl
  * @subpackage Message
@@ -84,7 +84,7 @@ class Message {
 	/**
 	 * Sets an Url to be sent with the message.
 	 * @throws \InvalidArgumentException
-	 * @param string url
+	 * @param string $sUrl
 	 * @return void
 	 */
 	public function setUrl($sUrl) {
@@ -260,7 +260,7 @@ class Message {
 	/**
 	 * Returns all actual api keys as array.
 	 *
-	 * @return array
+	 * @return array[string]
 	 */
 	public function getApiKeysAsArray() {
 		return $this->aApiKeys;

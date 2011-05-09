@@ -19,7 +19,7 @@ namespace Prowl\Security;
 /**
  * Filter Interface
  * 
- * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @author Mario Mueller <mario.mueller.work at gmail.com>
  * @version 1.0.0
  * @package Prowl
  * @subpackage Connector.Security

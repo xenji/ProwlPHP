@@ -20,9 +20,9 @@ namespace Prowl;
  * Prowl Connector
  *
  * This class provides a connection to the prowl service
- * at <link>http://www.prowlapp.com/</link>.
+ * at http://www.prowlapp.com.
  *
- * @author Mario Mueller <mario.mueller.work@gmail.com>
+ * @author Mario Mueller <mario.mueller.work at gmail.com>
  * @version 1.0.0
  * @package Prowl
  * @subpackage Connector
@@ -124,7 +124,7 @@ class Connector {
 	 * cUrl + SSL. Use the setters of this class
 	 * to provide the mandatory parameters.
 	 *
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 * @return void
 	 */
 	public function __construct() {
@@ -183,10 +183,9 @@ class Connector {
 	 * Verifies the keys. This is optional but
 	 * will we part of the future workflow
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param string $sApikey
 	 * @param string $sProvkey
-	 * @return ProwlResponse
+	 * @return \Prowl\Response
 	 */
 	public function verify($sApikey, $sProvkey) {
 		$sReturn = $this->execute(sprintf($this->sVerifyContext, $sApikey, $sProvkey));
@@ -198,9 +197,8 @@ class Connector {
 	 * Sets the provider key.
 	 * This method uses a fluent interface.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param string $sKey
-	 * @return Prowl
+	 * @return \Prowl\Connector
 	 */
 	public function setProviderKey($sKey) {
 		if (is_string($sKey)) {
@@ -215,7 +213,6 @@ class Connector {
 	 * Sets the post request identifier to true or false.
 	 * This method uses a fluent interface.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param boolean $bIsPost
 	 * @return \Prowl\Connector
 	 */
@@ -231,7 +228,7 @@ class Connector {
 	/**
 	 * Pushes a message to the given api key.
 	 *
-	 * @param ProwlMessage $oMessage
+	 * @param \Prowl\Message $oMessage
 	 * @return \Prowl\Response
 	 */
 	public function push(\Prowl\Message $oMessage) {
@@ -304,7 +301,6 @@ class Connector {
 		}
 	}
 
-
 	/**
 	 * Requests a token for a user registration. This is the first step.
 	 * Be sure to set the provider key first! This call doesn't lower your
@@ -357,7 +353,7 @@ class Connector {
 	/**
 	 * The remaining requests
 	 *
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 * @return integer
 	 */
 	public function getRemaining() {
@@ -370,8 +366,7 @@ class Connector {
 	/**
 	 * The reset date by last response.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
-	 * @throws RuntimeException
+	 * @throws \RuntimeException
 	 * @return integer
 	 */
 	public function getResetDate() {
@@ -384,7 +379,6 @@ class Connector {
 	/**
 	 * Executes the request via cUrl and returns the response.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @param string	 $sUrl			 The resource context
 	 * @param boolean	 $bIsPostRequest	Is it a post request?
 	 * @param string	 $sParams		The urlencode'ed params.
@@ -420,11 +414,9 @@ class Connector {
 		return $sReturn;
 	}
 
-
 	/**
 	 * Sets the proxy server.
 	 *
-	 * @author Mario Mueller <mario.mueller.work@gmail.com>
 	 * @since  0.3.1
 	 * @param  string $sProxy			 The URL to a proxy server.
 	 * @param  string $sUserPassword	The Password for the server (opt.)
