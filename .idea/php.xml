@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpProjectConfiguration">
+    <sdk>
+      <PhpSdkConfig version="5.3.6" home="/usr/bin/">
+        <include_paths>
+          <path value="." />
+          <path value="/usr/lib/php/pear" />
+          <path value="/usr/local/pear/share/pear" />
+        </include_paths>
+      </PhpSdkConfig>
+    </sdk>
+  </component>
+</project>
+

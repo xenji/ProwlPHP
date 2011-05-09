@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen; http://apigen.org" />
+	<title>Class Prowl\Response</title>
+
+	<link rel="stylesheet" href="resources/style.css?v=2011050909" type="text/css" media="all" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />	<script type="text/javascript" src="resources/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li><a href="namespace-PHP.html">PHP</a>
+		</li>
+		<li class="active"><a href="namespace-Prowl.html">Prowl</a>
+		</li>
+		<li><a href="namespace-Prowl.Security.html">Prowl\Security</a>
+		</li>
+	</ul>
+
+	<hr />
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="Prowl.Connector.html">Connector</a></li>
+
+		<li><a href="Prowl.Message.html">Message</a></li>
+
+		<li class="active"><a href="Prowl.Response.html">Response</a></li>
+
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+	</ul>
+
+	<h3>Exceptions</h3>
+
+	<ul>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Prowl.html" title="Summary of Prowl">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Prowl.html">Prowl</a></p>
+
+		<h1>Class Response</h1>
+		<div class="classDescription">
+
+		
+<p>Prowl Connector<br>
+This class provides a response of the connector.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> Mario Mueller &lt;mario.mueller.work<br />
+				<b>Version:</b> 1.0.0<br />
+				<b>Package:</b> Prowl<br />
+				<b>Subpackage:</b> Response<br />
+			<b>Located at</b> <a href="source-Prowl.Response.php.html#18">/Prowl/Response.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="0 fromResponseXml" id="_fromResponseXml">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="Prowl.Response.html">Response</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fromResponseXml">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#103" title="go to source code"><b>fromResponseXml</b></a>(
+					string
+					<var>$sXml</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Takes the raw api response.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Takes the raw api response.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sXml</code> string $sXml<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Response.html">Response</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 isError" id="_isError">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isError">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#153" title="go to source code"><b>isError</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns a boolean value indicating</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns a boolean value indicating<br>
+if the response was an error or not.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getErrorAsString" id="_getErrorAsString">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getErrorAsString">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#168" title="go to source code"><b>getErrorAsString</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the corresponding error</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the corresponding error<br>
+message.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getRemaining" id="_getRemaining">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getRemaining">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#180" title="go to source code"><b>getRemaining</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>The remaining requests.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>The remaining requests.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">integer </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getResetDate" id="_getResetDate">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResetDate">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#190" title="go to source code"><b>getResetDate</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>The reset date.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>The reset date.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">integer </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getApiKey" id="_getApiKey">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getApiKey">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#200" title="go to source code"><b>getApiKey</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>The API key. This one is filled only if you</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>The API key. This one is filled only if you<br>
+requested a token and api key.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getToken" id="_getToken">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getToken">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#211" title="go to source code"><b>getToken</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the token from a retrieve request. This one</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the token from a retrieve request. This one<br>
+is null when you just sent a message.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getTokenUrl" id="_getTokenUrl">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTokenUrl">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Response.php.html#222" title="go to source code"><b>getTokenUrl</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>The token url to redirect the user to.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>The token url to redirect the user to.<br>
+This one is filled only if you made a retrieve/token<br>
+request.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="RESPONSE_OK" id="RESPONSE_OK">
+			<td align="right" width="1%"><code><b>RESPONSE_OK</b></code></td>
+			<td><code><span class="php-num">200</span></code> <a href="#RESPONSE_OK" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="RESPONSE_NOK" id="RESPONSE_NOK">
+			<td align="right" width="1%"><code><b>RESPONSE_NOK</b></code></td>
+			<td><code>-<span class="php-num">1</span></code> <a href="#RESPONSE_NOK" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+</div>
+
+	<div id="footer">
+		ProwlPHPDoc generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</body>
+</html>

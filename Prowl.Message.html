@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen; http://apigen.org" />
+	<title>Class Prowl\Message</title>
+
+	<link rel="stylesheet" href="resources/style.css?v=2011050909" type="text/css" media="all" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />	<script type="text/javascript" src="resources/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li><a href="namespace-PHP.html">PHP</a>
+		</li>
+		<li class="active"><a href="namespace-Prowl.html">Prowl</a>
+		</li>
+		<li><a href="namespace-Prowl.Security.html">Prowl\Security</a>
+		</li>
+	</ul>
+
+	<hr />
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="Prowl.Connector.html">Connector</a></li>
+
+		<li class="active"><a href="Prowl.Message.html">Message</a></li>
+
+		<li><a href="Prowl.Response.html">Response</a></li>
+
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+	</ul>
+
+	<h3>Exceptions</h3>
+
+	<ul>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li><a href="namespace-Prowl.html" title="Summary of Prowl">Namespace</a></li>
+		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">		<p>namespace <a href="namespace-Prowl.html">Prowl</a></p>
+
+		<h1>Class Message</h1>
+		<div class="classDescription">
+
+		
+<p>Prowl Message<br>
+This class represents a single message<br>
+to be send by the connector.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> Mario Mueller &lt;mario.mueller.work<br />
+				<b>Version:</b> 1.0.0<br />
+				<b>Package:</b> Prowl<br />
+				<b>Subpackage:</b> Message<br />
+			<b>Located at</b> <a href="source-Prowl.Message.php.html#18">/Prowl/Message.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 setUrl" id="_setUrl">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setUrl">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#84" title="go to source code"><b>setUrl</b></a>(
+					string
+					<var>$sUrl</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets an Url to be sent with the message.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets an Url to be sent with the message.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sUrl</code> string url<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getUrl" id="_getUrl">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getUrl">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#100" title="go to source code"><b>getUrl</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the Url that should be sent with the message</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the Url that should be sent with the message</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setFilter" id="_setFilter">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setFilter">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#108" title="go to source code"><b>setFilter</b></a>(
+					<a href="Prowl.Security.Secureable.html">Prowl\Security\Secureable</a>
+					
+					<var>$oFilterInstance</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Set a filter instance. If you do not need a filter, use the</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Set a filter instance. If you do not need a filter, use the<br>
+Passthrough filter.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$oFilterInstance</code> <a href="Prowl.Security.Secureable.html">Prowl\Security\Secureable</a> $oFilterInstance<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getFilter" id="_getFilter">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Security.Secureable.html">Prowl\Security\Secureable</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getFilter">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#120" title="go to source code"><b>getFilter</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the filter instance, if set. It might return null</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the filter instance, if set. It might return null<br>
+when no filter is set.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Security.Secureable.html">Prowl\Security\Secureable</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setFilterCallback" id="_setFilterCallback">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setFilterCallback">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#130" title="go to source code"><b>setFilterCallback</b></a>(
+					<a href="Closure.html">Closure</a>
+					
+					<var>$cCallback</var>
+			)</code>
+
+			<div class="short">
+				
+<p>An alternative way to filter. You can set a</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>An alternative way to filter. You can set a<br>
+closure instead of a filter instance. If both are<br>
+set, the closure will be preferred.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$cCallback</code> <a href="Closure.html">Closure</a> $cCallback<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getFilterCallback" id="_getFilterCallback">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Closure.html">Closure</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getFilterCallback">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#141" title="go to source code"><b>getFilterCallback</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Getter for the filter closure.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Getter for the filter closure.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Closure.html">Closure</a> </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setEvent" id="_setEvent">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setEvent">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#149" title="go to source code"><b>setEvent</b></a>(
+					string
+					<var>$sEvent</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the event.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the event.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sEvent</code> string $sEvent The event.<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getEvent" id="_getEvent">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getEvent">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#166" title="go to source code"><b>getEvent</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the event.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the event.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setApplication" id="_setApplication">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setApplication">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#174" title="go to source code"><b>setApplication</b></a>(
+					string
+					<var>$sApp</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the application.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the application.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sApp</code> string $sApp The name of the sending application.<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getApplication" id="_getApplication">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getApplication">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#191" title="go to source code"><b>getApplication</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the application string.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the application string.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setDescription" id="_setDescription">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setDescription">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#200" title="go to source code"><b>setDescription</b></a>(
+					string
+					<var>$sDescription</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the event description.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the event description.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sDescription</code> string $sDescription The event description.<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getDescription" id="_getDescription">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getDescription">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#217" title="go to source code"><b>getDescription</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the description.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the description.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 addApiKey" id="_addApiKey">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addApiKey">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#226" title="go to source code"><b>addApiKey</b></a>(
+					string
+					<var>$sKey</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the api key.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the api key.<br>
+This method uses a fluent interface.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sKey</code> string $sKey An valid api key.<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 removeApiKey" id="_removeApiKey">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_removeApiKey">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#243" title="go to source code"><b>removeApiKey</b></a>(
+					string
+					<var>$sKey</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Removes an api key from the receiver list.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Removes an api key from the receiver list.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sKey</code> string $sKey<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="OutOfRangeException.html">OutOfRangeException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getApiKeysAsArray" id="_getApiKeysAsArray">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getApiKeysAsArray">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#260" title="go to source code"><b>getApiKeysAsArray</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns all actual api keys as array.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns all actual api keys as array.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">array </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getApiKeysAsString" id="_getApiKeysAsString">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getApiKeysAsString">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#269" title="go to source code"><b>getApiKeysAsString</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns all actual api keys as string</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns all actual api keys as string</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">string </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 setPriority" id="_setPriority">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="Prowl.Message.html">Message</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setPriority">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#278" title="go to source code"><b>setPriority</b></a>(
+					integer
+					<var>$iPriority</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the proirity (-2 to 2)</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the proirity (-2 to 2)<br>
+This method uses a fluent interface.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$iPriority</code> integer $iPriority An signed integer from –2 to 2<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList"><a href="Prowl.Message.html">Message</a> </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 getPriority" id="_getPriority">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				integer
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getPriority">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#297" title="go to source code"><b>getPriority</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the priority as signed integer</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the priority as signed integer</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">integer </div>
+
+
+			</div>
+			</td>
+		</tr>
+
+		<tr data-order="1 validate" id="_validate">
+
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_validate">#</a>
+			<code class="nowrap">
+				<a href="source-Prowl.Message.php.html#306" title="go to source code"><b>validate</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Validates the basic needs of the prowl api.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Validates the basic needs of the prowl api.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean </div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="InvalidArgumentException.html">InvalidArgumentException</a> <br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+
+
+		</table>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		ProwlPHPDoc generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</body>
+</html>
