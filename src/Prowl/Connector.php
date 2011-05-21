@@ -119,6 +119,12 @@ class Connector {
 	private $cFilterCallback = null;
 
 	/**
+	 * Enforce SSL usage via cURL
+	 *@var boolean 
+	 */
+	private $bUseCurlSSL = true;
+
+	/**
 	 * ProwlConnector.class provides access to the
 	 * webservice interface of Prowl by using
 	 * cUrl + SSL. Use the setters of this class
@@ -377,6 +383,16 @@ class Connector {
 	}
 
 	/**
+	 * Sets the usage of SSL via cURL. Default is true!
+	 * 
+	 * @param boolean $bUseSwitch
+	 * @return void
+	 */
+	public function useSSL($bUseSwitch) {
+		$this->bUseCurlSSL = $bUseSwitch;
+	}
+
+	/**
 	 * Executes the request via cUrl and returns the response.
 	 *
 	 * @param string	 $sUrl			 The resource context
@@ -390,12 +406,22 @@ class Connector {
 			$sUrl .= $sParams;
 		}
 
-		$this->rCurl = curl_init($this->sApiUrl . $sUrl);
+		//TODO Make this more reliable
+		$sHackedUrl = $this->sApiUrl . $sUrl;
+		if ($this->bUseCurlSSL === true) {
+			$sHackedUrl = str_replace("http://", "https://", $sHackedUrl);
+		}
+
+		$this->rCurl = curl_init($sHackedUrl);
 
 		curl_setopt($this->rCurl, CURLOPT_HEADER, 0);
 		curl_setopt($this->rCurl, CURLOPT_USERAGENT, "Prowl PHP Client/" . $this->sVersion);
 		curl_setopt($this->rCurl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-		curl_setopt($this->rCurl, CURLOPT_SSL_VERIFYPEER, false);
+
+		if ($this->bUseCurlSSL === true) {
+			curl_setopt($this->rCurl, CURLOPT_SSL_VERIFYPEER, false);
+		}
+
 		curl_setopt($this->rCurl, CURLOPT_RETURNTRANSFER, 1);
 
 		if ($bIsPostRequest) {
