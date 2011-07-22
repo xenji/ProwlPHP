@@ -94,7 +94,7 @@ class Message {
 			throw new \InvalidArgumentException("Given url [$sUrl] did not pass the validation.");
 		}
 
-		$this->sUrl;
+		$this->sUrl = (string)$sUrl;
 	}
 
 	/**
