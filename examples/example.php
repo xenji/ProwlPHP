@@ -21,7 +21,10 @@
  * @version 1.0.0
  */
 require_once dirname(__FILE__) . '/bootstrap.php';
+
+// Use \Prowl\SecureConnector to make cUrl use SSL
 $oProwl = new \Prowl\Connector();
+
 $oMsg = new \Prowl\Message();
 
 // If you have one:
