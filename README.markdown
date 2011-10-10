@@ -12,6 +12,13 @@ the original source, are published under Apache 2.0 License. Read the LICENSE fi
 Versions below 1.0.0 support PHP 5.2, from release 1.0.0 on PHP 5.3 will be supported exclusively. You can use the 0.3.3 branch,
 if you really need support for PHP 5.2, but I will only handle bug related issues on that branch, no feature requests.
 
+## PEAR Channel
+ProwlPHP can be installed from PEAR.
+```
+xenji@xenjibook:~/pear channel-discover pear.xenji.com
+xenji@xenjibook:~/pear install xenji/Prowl
+```
+
 ## Documentation
 This project is badly documented at the moment. You can find the API docs on [this repos GitHub pages](http://xenji.github.com/ProwlPHP/).
 The wiki at Fenric's repo has been switched off so I have to write the docs from the scratch. Please visit the wiki pages
