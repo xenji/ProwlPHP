@@ -33,7 +33,7 @@ namespace Prowl {
 		 * System version to send it with the client string
 		 * @var string
 		 */
-		protected $sVersion = "1.0.0";
+		protected $sVersion = "1.0.2";
 
 		/**
 		 * The cUrl connection
@@ -79,7 +79,7 @@ namespace Prowl {
 		 * The API base url.
 		 * @var string
 		 */
-		protected $sApiUrl = 'https://api.prowlapp.com/publicapi/';
+		protected $sApiUrl = 'http://api.prowlapp.com/publicapi/';
 
 		/**
 		 * The API key verification url
@@ -107,7 +107,7 @@ namespace Prowl {
 		 * has no filter set.
 		 * @var \Prowl\Security\Secureable
 		 */
-		private $oFilterIntance = null;
+		protected $oFilterIntance = null;
 
 		/**
 		 * An alternative way to filter. You can set a
@@ -116,13 +116,7 @@ namespace Prowl {
 		 *
 		 * @var \Closure
 		 */
-		private $cFilterCallback = null;
-
-		/**
-		 * Enforce SSL usage via cURL
-		 *@var boolean
-		 */
-		private $bUseCurlSSL = true;
+		protected $cFilterCallback = null;
 
 		/**
 		 * ProwlConnector.class provides access to the
@@ -131,16 +125,10 @@ namespace Prowl {
 		 * to provide the mandatory parameters.
 		 *
 		 * @throws \RuntimeException
-		 * @return void
 		 */
 		public function __construct() {
 			if (extension_loaded('curl') == false) {
 				throw new \RuntimeException('cUrl Extension is not available.');
-			}
-
-			$curl_info = curl_version(); // Checks for cURL function and SSL version. Thanks Adrian Rollett!
-			if (empty($curl_info['ssl_version'])) {
-				throw new \RuntimeException('Your cUrl Extension does not support SSL.');
 			}
 		}
 
@@ -337,6 +325,7 @@ namespace Prowl {
 		 * global remaining call-count.
 		 *
 		 * @throws \RuntimeException
+		 * @param string $sToken the token to use for retrieval of an api key
 		 * @return \Prowl\Response
 		 */
 		public function retrieveApiKey($sToken) {
@@ -383,16 +372,6 @@ namespace Prowl {
 		}
 
 		/**
-		 * Sets the usage of SSL via cURL. Default is true!
-		 *
-		 * @param boolean $bUseSwitch
-		 * @return void
-		 */
-		public function useSSL($bUseSwitch) {
-			$this->bUseCurlSSL = $bUseSwitch;
-		}
-
-		/**
 		 * Executes the request via cUrl and returns the response.
 		 *
 		 * @param string	 $sUrl			 The resource context
@@ -406,21 +385,11 @@ namespace Prowl {
 				$sUrl .= $sParams;
 			}
 
-			//TODO Make this more reliable
-			$sHackedUrl = $this->sApiUrl . $sUrl;
-			if ($this->bUseCurlSSL === true) {
-				$sHackedUrl = str_replace("http://", "https://", $sHackedUrl);
-			}
-
-			$this->rCurl = curl_init($sHackedUrl);
+			$this->rCurl = curl_init($this->sApiUrl . $sUrl);
 
 			curl_setopt($this->rCurl, CURLOPT_HEADER, 0);
 			curl_setopt($this->rCurl, CURLOPT_USERAGENT, "Prowl PHP Client/" . $this->sVersion);
 			curl_setopt($this->rCurl, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-
-			if ($this->bUseCurlSSL === true) {
-				curl_setopt($this->rCurl, CURLOPT_SSL_VERIFYPEER, false);
-			}
 
 			curl_setopt($this->rCurl, CURLOPT_RETURNTRANSFER, 1);
 
@@ -444,8 +413,8 @@ namespace Prowl {
 		 * Sets the proxy server.
 		 *
 		 * @since  0.3.1
-		 * @param  string $sProxy			 The URL to a proxy server.
-		 * @param  string $sUserPassword	The Password for the server (opt.)
+		 * @param string $sProxy			 The URL to a proxy server.
+		 * @param string $sUserPasswd The Password for the server (opt.)
 		 * @return \Prowl\Connector
 		 */
 		public function setProxy($sProxy, $sUserPasswd = null) {
