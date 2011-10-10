@@ -16,6 +16,7 @@ if you really need support for PHP 5.2, but I will only handle bug related issue
 ProwlPHP can be installed from PEAR.
 ```
 xenji@xenjibook:~/pear channel-discover pear.xenji.com
+
 xenji@xenjibook:~/pear install xenji/Prowl
 ```
 
