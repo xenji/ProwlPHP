@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://pear.xenji.com</id>
+    <updated>2011-10-10T17:29:00+02:00</updated>
+    <title>xenji.com PEAR channel Latest Releases</title>
+    <link href="http://pear.xenji.com/feed.xml" rel="self" />
+    <author>
+        <name>http://pear.xenji.com</name>
+    </author>
+
+    <entry>
+        <title>Prowl 1.0.2 (stable)</title>
+        <link href="http://pear.xenji.com/get/Prowl-1.0.2.tgz" />
+        <id>http://pear.xenji.com/get/Prowl-1.0.2.tgz</id>
+        <author>
+            <name>xenji</name>
+        </author>
+        <updated>2011-10-10T15:27:51+02:00</updated>
+        <content>
+            
+http://github.com/xenji/ProwlPHP/tree
+ 
+        </content>
+    </entry>    <entry>
+        <title>Prowl 1.0.1 (stable)</title>
+        <link href="http://pear.xenji.com/get/Prowl-1.0.1.tgz" />
+        <id>http://pear.xenji.com/get/Prowl-1.0.1.tgz</id>
+        <author>
+            <name>xenji</name>
+        </author>
+        <updated>2011-10-10T14:52:22+02:00</updated>
+        <content>
+            
+http://github.com/xenji/ProwlPHP/tree
+ 
+        </content>
+    </entry>
+</feed>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<a xmlns="http://pear.php.net/dtd/rest.allreleases2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink"     xsi:schemaLocation="http://pear.php.net/dtd/rest.allreleases2 http://pear.php.net/dtd/rest.allreleases2.xsd">
+    <p>Prowl</p>
+    <c>pear.xenji.com</c>
+    <r>
+        <v>1.0.2</v>
+        <s>stable</s>
+        <m>5.3.0RC1</m>
+    </r>
+    <r>
+        <v>1.0.1</v>
+        <s>stable</s>
+        <m>5.3.0RC1</m>
+    </r>
+
+</a>

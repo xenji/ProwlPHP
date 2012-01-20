@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<server>
+  <name>pear.xenji.com</name>
+  <summary>xenji.com PEAR channel</summary>
+  <alias>xenji</alias>
+  <url>http://pear.xenji.com/</url>
+</server>
