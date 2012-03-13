@@ -1,42 +1,41 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: mario
- * Date: 08.05.11
- * Time: 12:39
- * To change this template use File | Settings | File Templates.
- */
-require_once dirname(__FILE__) . '/bootstrap.php';
+namespace Prowl\Test;
 
 class TestConnector extends \PHPUnit_Framework_TestCase {
 
-	public function testDefaultMessageWithFilterInstance() {
-		$aConfig = include dirname(__FILE__) . '/config.php';
+	private $aConfig;
 
+	public function setUp()
+	{
+		$this->aConfig = include dirname(__FILE__) . '/../../config.php';
+		
+	}
+
+	public function testDefaultMessageWithFilterInstance() {
+		
 		$oConnector = new \Prowl\Connector();
-		$oConnector->setProviderKey($aConfig['providerkey']);
+		$oConnector->setProviderKey($this->aConfig['providerkey']);
 
 		$oMessage = new \Prowl\Message();
-		$oMessage->addApiKey($aConfig['apikey']);
+		$oMessage->addApiKey($this->aConfig['apikey']);
 		$oMessage->setApplication("Unit Test");
 		$oMessage->setPriority(0);
 		$oMessage->setEvent("Unit Test");
 		$oMessage->setDescription("Unit Test testDefaultMessageWithFilterInstance");
 
-		$oMessage->setFilter(new Prowl\Security\PassthroughFilterImpl());
+		$oMessage->setFilter(new \Prowl\Security\PassthroughFilterImpl());
 
 		$oResponse = $oConnector->push($oMessage);
 		$this->assertFalse($oResponse->isError());
 	}
 
 	public function testDefaultMessageWithClosure() {
-		$aConfig = include dirname(__FILE__) . '/config.php';
 
 		$oConnector = new \Prowl\Connector();
-		$oConnector->setProviderKey($aConfig['providerkey']);
+		$oConnector->setProviderKey($this->aConfig['providerkey']);
 
 		$oMessage = new \Prowl\Message();
-		$oMessage->addApiKey($aConfig['apikey']);
+		$oMessage->addApiKey($this->aConfig['apikey']);
 		$oMessage->setApplication("Unit Test");
 		$oMessage->setPriority(0);
 		$oMessage->setEvent("Unit Test");
@@ -51,10 +50,9 @@ class TestConnector extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testRetrieveToken() {
-		$aConfig = include dirname(__FILE__) . '/config.php';
-
+		
 		$oConnector = new \Prowl\Connector();
-		$oConnector->setProviderKey($aConfig['providerkey']);
+		$oConnector->setProviderKey($this->aConfig['providerkey']);
 
 		$oTokenResponse = $oConnector->retrieveToken();
 

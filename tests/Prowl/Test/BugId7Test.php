@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: mario
- * Date: 08.05.11
- * Time: 12:39
- * To change this template use File | Settings | File Templates.
- */
-require_once dirname(__FILE__) . '/bootstrap.php';
+namespace Prowl\Test;
 
 /**
  * Tests GitHub Issue #7
