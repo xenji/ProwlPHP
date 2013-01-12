@@ -1,6 +1,7 @@
 # ProwlPHP
 
 [![Build Status](https://secure.travis-ci.org/xenji/ProwlPHP.png)](http://travis-ci.org/xenji/ProwlPHP)
+[![endorse](http://api.coderwall.com/xenji/endorsecount.png)](http://coderwall.com/xenji)
 
 ## License
 The project source forked from Fenric had no license information. My modifications, which is a rewrite of 80-90% of
