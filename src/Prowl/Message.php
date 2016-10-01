@@ -88,9 +88,15 @@ namespace Prowl {
 		 * @return void
 		 */
 		public function setUrl($sUrl) {
-			$sUrl = filter_var($sUrl, FILTER_VALIDATE_URL);
+			$bVarRes = boolval(filter_var($sUrl, FILTER_VALIDATE_URL));
 
-			if (!$sUrl) {
+			if (stripos($sUrl,'tel:') === 0 ) {
+				$bVarRes = true;
+			} else {
+				$bVarRes = false;
+			}
+
+			if (!$bVarRes) {
 				throw new \InvalidArgumentException("Given url [$sUrl] did not pass the validation.");
 			}
 
