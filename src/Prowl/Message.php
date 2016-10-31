@@ -88,7 +88,7 @@ namespace Prowl {
 		 * @return void
 		 */
 		public function setUrl($sUrl) {
-			$bVarRes = boolval(filter_var($sUrl, FILTER_VALIDATE_URL));
+			$bVarRes = (bool)filter_var($sUrl, FILTER_VALIDATE_URL);
 
 			if (stripos($sUrl,'tel:') === 0 ) {
 				$bVarRes = true;
