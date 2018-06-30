@@ -258,7 +258,7 @@ namespace Prowl {
 				$aParams['url'] = $oMessage->getUrl();
 			}
 
-			array_map(create_function('$sAryVal', 'return str_replace("\\n","\n", $sAryVal);'), $aParams);
+			array_map(function($sAryVal) { return str_replace("\\n","\n", $sAryVal); }, $aParams);
 
 			$sContextUrl = $this->sPushEndpoint;
 
